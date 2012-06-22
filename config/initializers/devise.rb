@@ -213,13 +213,4 @@ Devise.setup do |config|
   #   manager.intercept_401 = false
   #   manager.default_strategies(:scope => :user).unshift :some_external_strategy
   # end
-
-  # if Rails.env.production?
-  #   TWITTER_ACCESS_TOKEN = ENV["TWITTER_ACCESS_TOKEN"]
-  #   TWITTER_ACCESS_TOKEN_SECRET = ENV["TWITTER_ACCESS_TOKEN_SECRET"]
-  # else
-  #   TWITTER_ACCESS_TOKEN = "R9pa1sPFTsBNGRZPLLqqtA"
-  #   TWITTER_ACCESS_TOKEN_SECRET = "3NMAguFLZMrGGdgiFCGypX55PJ73qhhXrQqa7MI7TU4" 
-  # end
-  # config.omniauth :twitter, TWITTER_ACCESS_TOKEN, TWITTER_ACCESS_TOKEN_SECRET, :scope => "user"
 end

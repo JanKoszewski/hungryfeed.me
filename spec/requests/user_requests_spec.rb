@@ -19,8 +19,7 @@ describe "User" do
     context "when a user clicks 'Login with Twitter'" do
       it "should redirect to a twitter authentication page" do
         click_link('Login with Twitter')
-        page.should have_content "Username"
-        page.should have_content "Password"
+        page.should have_content "Authorize hungryfeed to use your account?"
       end
     end
   end

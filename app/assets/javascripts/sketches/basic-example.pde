@@ -13,7 +13,7 @@ int delay = 4;
 
 // Setup the Processing Canvas
 void setup(){
-  size( 400, 400 );
+  size( $(window).width(), $(window).height() );
   strokeWeight( 10 );
   frameRate( 15 );
   X = width / 2;
