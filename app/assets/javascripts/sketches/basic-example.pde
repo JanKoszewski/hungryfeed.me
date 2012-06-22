@@ -19,12 +19,16 @@ void setup(){
   X = width / 2;
   Y = width / 2;
   nX = X;
-  nY = Y;  
+  nY = Y;
+  PFont fontA = loadFont("courier");
+  textFont(fontA, 14); 
 }
 
 // Main draw loop
 void draw(){
   
+  text("Hello Web!",20,20);
+
   radius = radius + sin( frameCount / 4 );
   
   // Track circle to new destination

@@ -1,0 +1,10 @@
+Rails.application.config.middleware.use OmniAuth::Builder do
+  if Rails.env.production?
+    TWITTER_ACCESS_TOKEN = ENV["TWITTER_ACCESS_TOKEN"]
+    TWITTER_ACCESS_TOKEN_SECRET = ENV["TWITTER_ACCESS_TOKEN_SECRET"]
+  else
+    TWITTER_ACCESS_TOKEN = "R9pa1sPFTsBNGRZPLLqqtA"
+    TWITTER_ACCESS_TOKEN_SECRET = "3NMAguFLZMrGGdgiFCGypX55PJ73qhhXrQqa7MI7TU4" 
+  end
+  provider :twitter, TWITTER_ACCESS_TOKEN, TWITTER_ACCESS_TOKEN_SECRET
+end
