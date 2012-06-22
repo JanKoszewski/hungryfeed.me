@@ -6,6 +6,7 @@ gem 'mysql2'
 gem 'omniauth'
 gem 'jquery-rails'
 gem 'devise'
+gem 'faraday'
 gem 'omniauth-twitter'
 
 group :assets do
