@@ -2,6 +2,8 @@
 {
   height: 300px;
   position: relative;
+  border: 5px solid red;
+  z-index: 5;
 }
 
 #login_buttons
@@ -15,10 +17,10 @@
 
 #login-button
 {
-  margin-left: 40%;
+  margin-left: 42%;
 }
 
 #login-override-button
 {
-  margin-left: 23.35%;
+  margin-left: 24.65%;
 }
