@@ -21,4 +21,8 @@ class TwitterParser
                  :twitter_user_image => tweet["profile_image_url_https"]
                  )
   end
+
+  def self.create_deal_from(link)
+    Deal.new
+  end
 end

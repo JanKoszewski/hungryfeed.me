@@ -18,6 +18,10 @@ describe TwitterParser do
     TwitterParser.respond_to?(:create_tweet_from).should be_true
   end
 
+  it "should have a create_deal_from class method" do
+    TwitterParser.respond_to?(:create_deal_from).should be_true
+  end
+
   describe ".perform" do
 
     it "should raise an ArgumentError error if no parameters passed" do
@@ -71,7 +75,7 @@ describe TwitterParser do
     context "when passed valid data" do
 
       it "should return a Tweet object" do
-        TwitterParser.create_tweet_from(tweet_data).class.should be_a Tweet.class
+        TwitterParser.create_tweet_from(tweet_data).should be_a_kind_of(Tweet)
       end
 
       it "should return a Tweet object whose content contains a link to a LivingSocial deal" do
@@ -81,6 +85,22 @@ describe TwitterParser do
 
     end
 
+  end
+
+  describe ".create_deal_from" do
+
+    it "should raise an ArgumentError error if no parameters passed" do
+      expect { TwitterParser.create_deal_from }.to raise_error(ArgumentError)
+    end
+
+    context "when passed valid data" do
+
+      it "should return a Deal object" do
+        TwitterParser.create_deal_from(TwitterParser.find_link(tweet_data)).should be_a_kind_of(Deal)
+      end
+
+    end
+     
   end
 
 end
