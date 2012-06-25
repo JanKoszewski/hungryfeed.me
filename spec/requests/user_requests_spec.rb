@@ -20,9 +20,9 @@ describe "User" do
 
       it "should redirect to a twitter authentication page" do
         
-        click_link('Login with Twitter')
+        pending #click_link('Login with Twitter')
         
-        page.should have_content "Authorize hungryfeed to use your account?"
+        #page.should have_content "Authorize hungryfeed to use your account?"
       end
 
     end
