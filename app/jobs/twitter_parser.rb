@@ -1,13 +1,12 @@
 class TwitterParser
   TWEET_REGEX = /((?:http|https):\/\/[a-z0-9]+(?:[\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(?:(?::[0-9]{1,5})?\/[^\s]*)?)+( via @LivingSocial)/
 
-  def self.perform(tweet_array, data = [])
+  def self.perform(tweet_array)
     tweet_array.each do |tweet|
-      if link = find_link(tweet)
-        data << link
+      if find_link(tweet)
+        create_tweet_from(tweet)
       end
     end
-    data
   end
 
   def self.find_link(tweet)
@@ -16,7 +15,10 @@ class TwitterParser
     end
   end
 
-  def self.find_user(tweet)
-    tweet["from_user"]
+  def self.create_tweet_from(tweet)
+    Tweet.create(:content => tweet["text"], 
+                 :twitter_username => tweet["from_user"], 
+                 :twitter_user_image => tweet["profile_image_url_https"]
+                 )
   end
 end
