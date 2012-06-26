@@ -10,6 +10,8 @@ gem 'faraday'
 gem 'omniauth-twitter'
 gem 'mechanize'
 gem 'klout'
+gem 'resque', :require => 'resque/server'
+gem 'resque-scheduler', :require => 'resque_scheduler'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'

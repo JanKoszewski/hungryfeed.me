@@ -1,6 +1,8 @@
 require 'faraday'
 
 class TwitterFeed
+  @queue = :update_tweets
+
   def self.perform
     @conn = Faraday.new(:url => "http://search.twitter.com/search.json")
 
@@ -10,6 +12,6 @@ class TwitterFeed
     end
 
     response = JSON.parse(resp.body)
-    response["results"]
+    TwitterParser.perform(response["results"])
   end
 end

@@ -13,8 +13,4 @@ class Tweet < ActiveRecord::Base
     user_id = find_or_create_user.id
     self.update_attributes(:user_id => user_id)
   end
-
-  def fetch_most_recent_tweets
-    Resque.enqueue(TwitterFeed, self)
-  end
 end

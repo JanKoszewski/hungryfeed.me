@@ -3,6 +3,7 @@ require 'open-uri'
 require 'mechanize'
 
 class TwitterParser
+  @queue = :twitter_parser
   TWEET_REGEX = /((?:http|https):\/\/[a-z0-9]+(?:[\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(?:(?::[0-9]{1,5})?\/[^\s]*)?)+( via @LivingSocial)/
   LINK_VALIDATION_REGEX = /livingsocial.com\/(\w+)/
 
@@ -24,23 +25,30 @@ class TwitterParser
     end
   end
 
-  def self.create_tweet_from(tweet, deal_id)
-    tweet = Tweet.where(:content => tweet["text"]).first_or_initialize
-    tweet.twitter_username = tweet["from_user"]
-    tweet.twitter_user_image = tweet["profile_image_url_https"]
+  def self.create_tweet_from(original_tweet, deal_id)
+    tweet = Tweet.where(:content => original_tweet["text"]).first_or_initialize
+    tweet.twitter_username = original_tweet["from_user"]
+    tweet.twitter_user_image = original_tweet["profile_image_url_https"]
     tweet.deal_id = deal_id
     tweet.save
     tweet
   end
 
   def self.create_deal_from(link)
-    doc = Nokogiri::HTML(open(link))
-    deal = Deal.where(:link => doc.at('link[rel=canonical]')['href'],
-                      :image => doc.at('//img')['src']
-                      ).first_or_initialize
-    deal.purchased = doc.at('.purchased .value').text.match(/\d/)[0]
+    deal_page = parse_deal_page(link)
+    deal = Deal.where(:link => deal_page[:link]).first_or_initialize
+    deal.image = deal_page[:image]
+    deal.purchased = deal_page[:purchased]
     deal.save
     deal
+  end
+
+  def self.parse_deal_page(link)
+    doc = Nokogiri::HTML(open(link))
+    {:link => doc.at('link[rel=canonical]')['href'], 
+     :image => doc.at('//img')['src'], 
+     :purchased => doc.at('.purchased .value').text.match(/\d/)[0]
+    }
   end
 
   def self.validate_deal_with(link)
