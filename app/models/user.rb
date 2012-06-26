@@ -9,7 +9,6 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable
 
-  # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, :twitter_link, :twitter_username, :klout_score
 
   def find_klout_score
@@ -20,5 +19,9 @@ class User < ActiveRecord::Base
 
   def set_klout_score
     self.update_attributes(:klout_score => self.find_klout_score)
+  end
+
+  def set_twitter_link
+    self.update_attributes(:twitter_link => "https://twitter.com/#{self.twitter_username}")
   end
 end

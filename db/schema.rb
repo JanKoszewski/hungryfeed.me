@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120626123757) do
+ActiveRecord::Schema.define(:version => 20120626145649) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -41,6 +41,8 @@ ActiveRecord::Schema.define(:version => 20120626123757) do
     t.string   "twitter_username"
     t.string   "twitter_user_image"
     t.integer  "deal_id"
+    t.integer  "user_id"
+    t.string   "link"
   end
 
   add_index "tweets", ["deal_id"], :name => "index_tweets_on_deal_id"

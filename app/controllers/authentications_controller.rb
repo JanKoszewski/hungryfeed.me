@@ -16,8 +16,7 @@ class AuthenticationsController < ApplicationController
       flash[:notice] = "Authentication successful."
       redirect_to authentications_url
     else
-      user = User.new(:twitter_link => omniauth["info"]["urls"]["Twitter"], 
-                      :twitter_username => omniauth["info"]["nickname"])
+      user = User.new(:twitter_username => omniauth["info"]["nickname"])
       user.authentications.build(:provider => omniauth ['provider'], 
                                  :uid => omniauth['uid'], 
                                  :access_token => omniauth["credentials"]["token"])
