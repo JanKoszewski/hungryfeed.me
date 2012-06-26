@@ -1,5 +1,8 @@
+require 'klout'
+
 class User < ActiveRecord::Base
   has_many :authentications
+  has_many :tweets
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
@@ -7,6 +10,15 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :twitter_link, :twitter_username
-  # attr_accessible :title, :body
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :twitter_link, :twitter_username, :klout_score
+
+  def find_klout_score
+    Klout.api_key = KLOUT_API_KEY
+    klout_id = Klout::Identity.find_by_screen_name(self.twitter_username)
+    klout_score = Klout::User.new(klout_id.id).score.score.to_i
+  end
+
+  def set_klout_score
+    self.update_attributes(:klout_score => self.find_klout_score)
+  end
 end

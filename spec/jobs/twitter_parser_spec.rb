@@ -43,6 +43,13 @@ describe TwitterParser do
       it "creates a new Tweet object" do
         expect { TwitterParser.perform(twitter_data) }.to change{ Tweet.all.count }.by(2)
       end
+
+      it "establishes a has-many relationship between the created deal and corresponding tweet" do
+        TwitterParser.perform(twitter_data)
+        Deal.all.each do |deal|
+          deal.tweets.count.should == 1
+        end
+      end
     end
   end
 
