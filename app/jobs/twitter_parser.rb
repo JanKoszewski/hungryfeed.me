@@ -10,8 +10,8 @@ class TwitterParser
     tweet_array.each do |tweet|
       if link = find_link(tweet)
         if validate_deal_with(link)
-          create_deal_from(link)
-          create_tweet_from(tweet)
+          deal_id = create_deal_from(link).id
+          create_tweet_from(tweet, deal_id)
         end
       end
     end
@@ -24,10 +24,11 @@ class TwitterParser
     end
   end
 
-  def self.create_tweet_from(tweet)
+  def self.create_tweet_from(tweet, deal_id)
     Tweet.create(:content => tweet["text"], 
                  :twitter_username => tweet["from_user"], 
-                 :twitter_user_image => tweet["profile_image_url_https"]
+                 :twitter_user_image => tweet["profile_image_url_https"],
+                 :deal_id => deal_id
                  )
   end
 

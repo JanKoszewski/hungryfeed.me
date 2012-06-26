@@ -15,4 +15,8 @@ describe Tweet do
     expect { tweet.send(:twitter_user_image) }.to_not raise_error(NoMethodError)
   end
 
+  it "has an ActiveModel mass assignment method for content" do
+    expect { tweet.send(:deal_id) }.to_not raise_error(NoMethodError)
+  end
+
 end

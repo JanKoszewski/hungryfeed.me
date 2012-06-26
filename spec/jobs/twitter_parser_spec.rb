@@ -6,6 +6,7 @@ describe TwitterParser do
   let(:tweet_data) { twitter_data.first }
   let(:bad_ls_tweet_data) { twitter_data[2] }
   let(:no_ls_tweet_data) { twitter_data.last }
+  let(:deal) { Deal.create(:link => "http://www.livingsocial.com/deals/336350-2-hour-photo-booth-rental-attendant-and-prints", :purchased => 41, :image => "http://a3.ak.lscdn.net/imgs/dc2a04cd-5724-4c87-bdde-8869b3bf8c27/280_q60_.jpg") }
 
   it "should have a perform class method" do
     TwitterParser.respond_to?(:perform).should be_true
@@ -76,14 +77,18 @@ describe TwitterParser do
       expect { TwitterParser.create_tweet_from }.to raise_error(ArgumentError)
     end
 
-    context "when passed valid data" do
+    it "should raise an ArgumentError error if only one parameter is passed" do
+      expect { TwitterParser.create_tweet_from("tweet") }.to raise_error(ArgumentError)
+    end
+
+    context "when passed valid tweet data" do
 
       it "should return a Tweet object" do
-        TwitterParser.create_tweet_from(tweet_data).should be_a_kind_of(Tweet)
+        TwitterParser.create_tweet_from(tweet_data, deal.id).should be_a_kind_of(Tweet)
       end
 
       it "should return a Tweet object whose content contains a link to a LivingSocial deal" do
-        tweet_content = { "text" => TwitterParser.create_tweet_from(tweet_data).content }
+        tweet_content = { "text" => TwitterParser.create_tweet_from(tweet_data, deal.id).content }
         TwitterParser.find_link(tweet_content).should == "http://www.livingsocial.com/deals/336350-2-hour-photo-booth-rental-attendant-and-prints"
       end
 
