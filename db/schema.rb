@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120625185208) do
+ActiveRecord::Schema.define(:version => 20120625211330) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -27,6 +27,9 @@ ActiveRecord::Schema.define(:version => 20120625185208) do
   add_index "authentications", ["user_id"], :name => "index_authentications_on_user_id"
 
   create_table "deals", :force => true do |t|
+    t.string   "link"
+    t.string   "purchased"
+    t.string   "image"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -37,7 +40,10 @@ ActiveRecord::Schema.define(:version => 20120625185208) do
     t.datetime "updated_at",         :null => false
     t.string   "twitter_username"
     t.string   "twitter_user_image"
+    t.integer  "deal_id"
   end
+
+  add_index "tweets", ["deal_id"], :name => "index_tweets_on_deal_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false

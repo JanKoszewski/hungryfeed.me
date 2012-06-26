@@ -1,17 +1,26 @@
+require 'nokogiri'
+require 'open-uri'
+require 'mechanize'
+
 class TwitterParser
   TWEET_REGEX = /((?:http|https):\/\/[a-z0-9]+(?:[\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(?:(?::[0-9]{1,5})?\/[^\s]*)?)+( via @LivingSocial)/
+  LINK_VALIDATION_REGEX = /livingsocial.com\/(\w+)/
 
   def self.perform(tweet_array)
     tweet_array.each do |tweet|
-      if find_link(tweet)
-        create_tweet_from(tweet)
+      if link = find_link(tweet)
+        if validate_deal_with(link)
+          create_deal_from(link)
+          create_tweet_from(tweet)
+        end
       end
     end
   end
 
   def self.find_link(tweet)
+    agent = Mechanize.new
     if data = tweet["text"].match(TWEET_REGEX)
-      data[1]
+      link = agent.get(data[1]).uri.to_s
     end
   end
 
@@ -23,6 +32,18 @@ class TwitterParser
   end
 
   def self.create_deal_from(link)
-    Deal.new
+    doc = Nokogiri::HTML(open(link))
+    deal = Deal.where(:link => doc.at('link[rel=canonical]')['href'],
+                      :image => doc.at('//img')['src']
+                      ).first_or_initialize
+    deal.purchased = doc.at('.purchased .value').text.match(/\d/)[0]
+    deal.save
+    deal
+  end
+
+  def self.validate_deal_with(link)
+    unless link.match(LINK_VALIDATION_REGEX)[1] == "events"
+      true
+    end
   end
 end

@@ -8,6 +8,7 @@ gem 'jquery-rails'
 gem 'devise'
 gem 'faraday'
 gem 'omniauth-twitter'
+gem 'mechanize'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
