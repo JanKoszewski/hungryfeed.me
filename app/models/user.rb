@@ -6,10 +6,12 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable
+  devise :registerable, :recoverable, :rememberable, :trackable, :database_authenticatable
 
   attr_accessible :email, :password, :password_confirmation, :remember_me, :twitter_link, :twitter_username, :klout_score
+
+  after_create :set_klout_score
+  after_create :set_twitter_link
 
   def find_klout_score
     Klout.api_key = KLOUT_API_KEY

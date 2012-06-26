@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Tweet do
-  let(:tweet) { Tweet.create(:twitter_username => "hungryfeedme1", :twitter_user_image => "http://a0.twimg.com/sticky/default_profile_images/default_profile_6_normal.png", :deal_id => 1) }
+  let(:tweet) { Tweet.create(:twitter_username => "jkoszewski", :twitter_user_image => "http://a0.twimg.com/sticky/default_profile_images/default_profile_6_normal.png", :deal_id => 1) }
   
   it "has an ActiveModel mass assignment method for content" do
     expect { tweet.send(:content) }.to_not raise_error(NoMethodError)
@@ -45,20 +45,24 @@ describe Tweet do
     end
 
     context "when a user already exists" do
-      let(:new_tweet) { Tweet.create(:twitter_username => "hungryfeedme1", :content => "second post!", :twitter_user_image => "http://a0.twimg.com/sticky/default_profile_images/default_profile_6_normal.png", :deal_id => 1) }
-      let(:created_user) { User.create(:twitter_username => "hungryfeedme1") }
+      let(:new_tweet) { Tweet.create(:twitter_username => "jkoszewski", :content => "second post!", :twitter_user_image => "http://a0.twimg.com/sticky/default_profile_images/default_profile_6_normal.png", :deal_id => 1) }
+      let(:created_user) { User.create(:twitter_username => "jkoszewski") }
 
       it "returns a user object" do
         new_tweet.find_or_create_user.should be_a_kind_of User
       end
 
       it "returns the already existing user" do
-        new_tweet.find_or_create_user.twitter_username.should == "hungryfeedme1"
+        new_tweet.find_or_create_user.twitter_username.should == "jkoszewski"
       end
     end
   end
 
   describe "#set_user_id" do
-    
+
+    it "sets the user_id of the tweet to that of the tweet's user" do
+      tweet.set_user_id
+      tweet.user_id.should == User.find_by_twitter_username("jkoszewski").id
+    end
   end
 end

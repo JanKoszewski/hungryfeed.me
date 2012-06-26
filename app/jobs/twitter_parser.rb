@@ -25,11 +25,12 @@ class TwitterParser
   end
 
   def self.create_tweet_from(tweet, deal_id)
-    Tweet.create(:content => tweet["text"], 
-                 :twitter_username => tweet["from_user"], 
-                 :twitter_user_image => tweet["profile_image_url_https"],
-                 :deal_id => deal_id
-                 )
+    tweet = Tweet.where(:content => tweet["text"]).first_or_initialize
+    tweet.twitter_username = tweet["from_user"]
+    tweet.twitter_user_image = tweet["profile_image_url_https"]
+    tweet.deal_id = deal_id
+    tweet.save
+    tweet
   end
 
   def self.create_deal_from(link)
