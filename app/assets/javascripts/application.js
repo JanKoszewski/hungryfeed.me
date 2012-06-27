@@ -18,6 +18,7 @@
 $(function() {
   var faye = new Faye.Client('http://localhost:9292/faye');
   faye.subscribe('/deals/new', function (deal) {
+    $('#deals').prepend(Mustache.to_html($('#deal_template').html(), deal));
     console.log(deal);
   });
   faye.subscribe('/tweets/new', function (tweet) {

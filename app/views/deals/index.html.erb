@@ -3,7 +3,7 @@
 <h1>Deals</h1>
 <div id="deals" data-json-url="<%= deals_url(:format => :json) %>">
 	<% @deals.each do |deal| %>
-	<div class="deal">
+	<div class="deal" id="<%= deal.title %>">
 	  <%= render "deal", mustache: deal_for_mustache(deal) %>
 	  <% deal.tweets.each do |tweet| %>
 	  <div class="tweet">
