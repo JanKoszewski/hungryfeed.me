@@ -7,6 +7,6 @@ class Deal < ActiveRecord::Base
   has_many :tweets
 
   def broadcast_deal
-    broadcast "/deals/", self
+    broadcast "/deals/new", self
   end
 end

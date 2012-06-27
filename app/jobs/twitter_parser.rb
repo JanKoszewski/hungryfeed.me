@@ -26,8 +26,7 @@ class TwitterParser
   end
 
   def self.create_tweet_from(original_tweet, deal_id)
-    tweet = Tweet.where(:content => original_tweet["text"]).first_or_initialize
-    tweet.twitter_username = original_tweet["from_user"]
+    tweet = Tweet.where(:content => original_tweet["text"], :twitter_username => original_tweet["from_user"]).first_or_initialize
     tweet.twitter_user_image = original_tweet["profile_image_url_https"]
     tweet.link = "https://twitter.com/#{original_tweet["from_user"]}/status/#{original_tweet["id_str"]}"
     tweet.deal_id = deal_id

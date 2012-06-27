@@ -5,8 +5,7 @@ module TweetsHelper
       twitter_username: tweet.twitter_username,
       content: tweet.content,
       link: tweet.link,
-      twitter_user_image: tweet.twitter_user_image,
-      created_at: tweet.created_at.try(:strftime, "%B %e, %Y")
+      twitter_user_image: tweet.twitter_user_image
     }
   end
 end

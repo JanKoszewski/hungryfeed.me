@@ -1,6 +1,6 @@
 class TweetsController < ApplicationController
   def index
-    @tweets = Tweet.order("created_at").limit(10)
+    @tweets = Tweet.order("created_at DESC").limit(10)
     @tweets = @tweets.offset((params[:page].to_i-1)*10) if params[:page].present?
     respond_to do |format|
 	    format.html
@@ -11,6 +11,6 @@ class TweetsController < ApplicationController
   end
 
   def show
-  	@tweet = Tweet.find(params[:id])
+    @tweet = Tweet.find(params[:id])   
   end
 end

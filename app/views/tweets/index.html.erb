@@ -1,13 +1,12 @@
 <title>"Tweets"</title>
 
 <h1>Tweets</h1>
-
 <div id="tweets" data-json-url="<%= tweets_url(:format => :json) %>">
 <% @tweets.each do |tweet| %>
-  <%= render 'tweet', :mustache => tweet_for_mustache(tweet) %>
+  <%= render "tweet", mustache: tweet_for_mustache(tweet) %>
 <% end %>
 </div>
-
 <script type="text/html" id="tweet_template">
   <%= render 'tweet' %>
 </script>
+
