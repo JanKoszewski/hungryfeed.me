@@ -1,5 +1,5 @@
 twitter_feed:
-  every: "30s"
+  every: "45s"
   class: TwitterFeed
   queue: update_tweets
   description: "This job will find any and all new @LivingSocial tweets, and create respective tweet, deal, and user objects from them"
