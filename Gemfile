@@ -13,6 +13,7 @@ gem 'klout'
 gem 'resque', :require => 'resque/server'
 gem 'resque-scheduler', :require => 'resque_scheduler'
 gem 'faye'
+gem 'mustache'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'

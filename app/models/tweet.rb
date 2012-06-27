@@ -17,6 +17,6 @@ class Tweet < ActiveRecord::Base
   end
 
   def broadcast_tweet
-    broadcast "/tweets/", self
+    broadcast "/tweets/new", self
   end
 end

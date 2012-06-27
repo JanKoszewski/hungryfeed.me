@@ -12,11 +12,12 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require mustache
 //= require_tree .
 
 $(function() {
   var faye = new Faye.Client('http://localhost:9292/faye');
-  faye.subscribe('/messages/new', function (data) {
-    alert(data);
+  faye.subscribe('/tweets/new', function (tweet) {
+    $('#tweets').prepend(Mustache.to_html($('#tweet_template').html(), tweet));
   });
 });

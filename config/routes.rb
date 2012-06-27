@@ -10,6 +10,10 @@ Hungryfeed::Application.routes.draw do
 
   resources :authentications
   resources :tweets
-  root :to => "tweets#index"
+  resources :deals
+
+  root to: "main#index"
+
+  match '*path', to: 'main#index'
   
 end

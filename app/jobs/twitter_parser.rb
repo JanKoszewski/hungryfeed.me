@@ -29,6 +29,7 @@ class TwitterParser
     tweet = Tweet.where(:content => original_tweet["text"]).first_or_initialize
     tweet.twitter_username = original_tweet["from_user"]
     tweet.twitter_user_image = original_tweet["profile_image_url_https"]
+    tweet.link = "https://twitter.com/#{original_tweet["from_user"]}/status/#{original_tweet["id_str"]}"
     tweet.deal_id = deal_id
     tweet.save
     tweet
