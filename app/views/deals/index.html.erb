@@ -1,0 +1,18 @@
+<title>"Deals"</title>
+
+<h1>Deals</h1>
+<div id="deals" data-json-url="<%= deals_url(:format => :json) %>">
+	<% @deals.each do |deal| %>
+	<div class="deal">
+	  <%= render "deal", mustache: deal_for_mustache(deal) %>
+	  <% deal.tweets.each do |tweet| %>
+	  <div class="tweet">
+	  	<%= render "tweet", mustache: tweet_for_mustache(tweet) %>
+	  </div>
+		<% end %>
+	</div>
+	<% end %>
+</div>
+<script type="text/html" id="deal_template">
+  <%= render 'deal' %>
+</script>

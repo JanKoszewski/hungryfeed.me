@@ -1,6 +1,6 @@
 class Deal < ActiveRecord::Base
 	include Broadcast
-  attr_accessible :link, :purchased, :image
+  attr_accessible :link, :purchased, :image, :title
 
   after_create :broadcast_deal
 

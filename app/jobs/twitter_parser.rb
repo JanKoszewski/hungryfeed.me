@@ -37,6 +37,7 @@ class TwitterParser
   def self.create_deal_from(link)
     deal_page = parse_deal_page(link)
     deal = Deal.where(:link => deal_page[:link]).first_or_initialize
+    deal.title = deal_page[:title]
     deal.image = deal_page[:image]
     deal.purchased = deal_page[:purchased]
     deal.save
@@ -47,7 +48,8 @@ class TwitterParser
     doc = Nokogiri::HTML(open(link))
     {:link => doc.at('link[rel=canonical]')['href'], 
      :image => doc.at('//img')['src'], 
-     :purchased => doc.at('.purchased .value').text.match(/\d/)[0]
+     :purchased => doc.at('.purchased .value').text.gsub(/\D/, "").to_i,
+     :title => doc.at('.deal-title h1').text
     }
   end
 
