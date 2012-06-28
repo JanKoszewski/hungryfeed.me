@@ -3,6 +3,9 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 jQuery ->
+  
+  $(".iframe").colorbox({iframe:true, width:"80%", height:"80%"});
+
   if $('#tweets').length
     new TweetsPager()
     
@@ -27,4 +30,3 @@ class TweetsPager
       else
         $(new_tweet).append('<a href="/auth/twitter" class="btn btn-medium btn-primary">Login with Twitter to reply!</a>')
     $(window).scroll(@check) if tweets.length > 0
-
