@@ -4,6 +4,7 @@
 <div id="tweets" data-json-url="<%= tweets_url(:format => :json) %>">
 <% @tweets.each do |tweet| %>
   <%= render "tweet", mustache: tweet_for_mustache(tweet) %>
+  <%= link_to "Respond to tweet", new_tweet_response_path, :id => "tweet_response", :class => 'btn btn-primary' %>
 <% end %>
 </div>
 <script type="text/html" id="tweet_template">

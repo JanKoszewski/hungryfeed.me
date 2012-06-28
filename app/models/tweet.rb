@@ -3,7 +3,7 @@ class Tweet < ActiveRecord::Base
   attr_accessible :content, :twitter_username, :twitter_user_image, :deal_id, :user_id, :link
   belongs_to :deal
   belongs_to :user
-  has_many :responses
+  has_many :tweet_responses
 
   after_create :set_user_id
   after_create :broadcast_tweet

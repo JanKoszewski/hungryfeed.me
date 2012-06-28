@@ -77,7 +77,7 @@ ActiveRecord::Schema.define(:version => 20120628005521) do
     t.datetime "updated_at",                             :null => false
     t.integer  "klout_score"
     t.string   "oauth_token"
-    t.string   "oauth_secret"
+    t.string   "oauth_token_secret"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email"

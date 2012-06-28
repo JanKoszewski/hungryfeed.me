@@ -5,6 +5,8 @@ class TweetResponse < ActiveRecord::Base
   belongs_to :user
   belongs_to :tweet
 
+  after_create :send_to_twitter
+
   def send_to_twitter
   	configure_for_twitter.update(self.content)
   end

@@ -3,13 +3,13 @@ require 'klout'
 class User < ActiveRecord::Base
   has_many :authentications
   has_many :tweets
-  has_many :responses
+  has_many :tweet_responses
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
   devise :registerable, :recoverable, :rememberable, :trackable, :database_authenticatable
 
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :twitter_link, :twitter_username, :klout_score
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :twitter_link, :twitter_username, :klout_score, :oauth_token, :oauth_token_secret
 
   after_create :set_klout_score
   after_create :set_twitter_link

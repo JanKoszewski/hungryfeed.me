@@ -11,6 +11,7 @@ Hungryfeed::Application.routes.draw do
   resources :authentications
   resources :tweets
   resources :deals
+  resources :tweet_responses
 
   root to: "main#index"
 
