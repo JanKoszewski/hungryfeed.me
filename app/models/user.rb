@@ -16,8 +16,11 @@ class User < ActiveRecord::Base
 
   def find_klout_score
     Klout.api_key = KLOUT_API_KEY
-    klout_id = Klout::Identity.find_by_screen_name(self.twitter_username)
-    klout_score = Klout::User.new(klout_id.id).score.score.to_i
+    if klout_id = Klout::Identity.find_by_screen_name(self.twitter_username)
+      klout_score = Klout::User.new(klout_id.id).score.score.to_i
+    else 
+      klout_score = 0
+    end
   end
 
   def set_klout_score

@@ -23,5 +23,6 @@ $(function() {
   });
   faye.subscribe('/tweets/new', function (tweet) {
     $('#tweets').prepend(Mustache.to_html($('#tweet_template').html(), tweet));
+    $('.tweet').first().append('<a href="/tweet_responses/new" class="btn btn-primary" id="tweet_response">Respond to tweet</a>');
   });
 });

@@ -1,0 +1,7 @@
+<%= form_for(@tweet_response) do |f| %>
+  <%= f.label :content %><br />
+  <%= f.text_field :content %><br />
+
+  <%= f.submit "Tweet Reply", class: "btn btn-large btn-primary" %>
+  
+<% end %>
