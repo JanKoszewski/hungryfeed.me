@@ -22,5 +22,10 @@ class TweetsPager
   render: (tweets) =>
     for tweet in tweets
       new_tweet = $('#tweets').append Mustache.to_html($('#tweet_template').html(), tweet)
-      $(new_tweet).append('<a href="/tweet_responses/new" class="btn btn-primary" id="tweet_response">Respond to tweet</a>')
+      if $("meta[name=current-user-name]")
+        console.log($("meta[name=current-user-name]"))
+        $(new_tweet).append('<a href="/tweet_responses/new" class="btn btn-primary" id="tweet_response">Respond to tweet</a>')
+      else
+        $(new_tweet).append('<a href="/auth/twitter" class="btn btn-medium btn-primary">Login with Twitter to reply!</a>')
     $(window).scroll(@check) if tweets.length > 0
+
