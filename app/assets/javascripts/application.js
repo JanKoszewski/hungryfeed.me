@@ -22,10 +22,12 @@ $(function() {
     console.log(deal);
   });
   faye.subscribe('/tweets/new', function (tweet) {
-    var new_tweet = $('#tweets').prepend(Mustache.to_html($('#tweet_template').html(), tweet));
-    if ($("meta[name=current-user-name]").attr("content")) {
-        $(new_tweet).append('<a href="/tweet_responses/new" class="btn btn-primary" id="tweet_response">Respond to tweet</a>');
-      } else {
-        $(new_tweet).append('<a href="/auth/twitter" class="btn btn-medium btn-primary">Login with Twitter to reply!</a>')};
+    var new_tweet;
+		new_tweet = $('#tweets').prepend(Mustache.to_html($('#tweet_template').html(), tweet));
+		if ($("meta[name=current-user-name]").attr("content")) {
+		  $('.tweet').first().append('<a href="/tweet_responses/new" class="btn btn-primary" id="tweet_response">Respond to tweet</a>');
+		} else {
+		  $('.tweet').first().append('<a href="/auth/twitter" class="btn btn-medium btn-primary">Login with Twitter to reply!</a>');
+		};
   });
 });
