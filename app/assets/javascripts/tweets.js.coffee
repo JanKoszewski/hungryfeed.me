@@ -21,5 +21,6 @@ class TweetsPager
     
   render: (tweets) =>
     for tweet in tweets
-      $('#tweets').append Mustache.to_html($('#tweet_template').html(), tweet)
+      new_tweet = $('#tweets').append Mustache.to_html($('#tweet_template').html(), tweet)
+      $(new_tweet).append('<a href="/tweet_responses/new" class="btn btn-primary" id="tweet_response">Respond to tweet</a>')
     $(window).scroll(@check) if tweets.length > 0
