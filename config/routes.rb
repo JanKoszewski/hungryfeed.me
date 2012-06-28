@@ -2,6 +2,7 @@ require 'resque/server'
 
 Hungryfeed::Application.routes.draw do
   mount Resque::Server.new, :at => "/resque"
+  
   match '/auth/:provider/callback' => 'authentications#create'
 
   devise_for :users do
@@ -14,7 +15,5 @@ Hungryfeed::Application.routes.draw do
   resources :tweet_responses
 
   root to: "main#index"
-
-  match '*path', to: 'main#index'
   
 end
