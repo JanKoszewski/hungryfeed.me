@@ -22,7 +22,7 @@ $(function() {
     console.log(deal);
   });
   faye.subscribe('/tweets/new', function (tweet) {
-    $('#tweets').prepend(Mustache.to_html($('#tweet_template').html(), tweet));
+    var new_tweet = $('#tweets').prepend(Mustache.to_html($('#tweet_template').html(), tweet));
     if ($("meta[name=current-user-name]").attr("content")) {
         $(new_tweet).append('<a href="/tweet_responses/new" class="btn btn-primary" id="tweet_response">Respond to tweet</a>');
       } else {
