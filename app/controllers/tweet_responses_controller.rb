@@ -1,11 +1,12 @@
 class TweetResponsesController < ApplicationController
 
-	def new 
+	def new
+		@tweet = Tweet.find(params[:format])
 		@tweet_response = TweetResponse.new
 	end
 
 	def create
-		@tweet_response = TweetResponse.new(:content => params[:content])
+		@tweet_response = TweetResponse.new(params[:tweet_response])
 		if @tweet_response.save
 			render :text => "Response sent successfully"
 		else
