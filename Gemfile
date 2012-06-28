@@ -15,6 +15,7 @@ gem 'resque-scheduler', :require => 'resque_scheduler'
 gem 'faye'
 gem 'mustache'
 gem 'jbuilder'
+gem 'twitter'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
