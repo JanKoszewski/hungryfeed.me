@@ -3,7 +3,7 @@
   y = /(^|["'(\s]|&lt;)((?:(?:https?|ftp):\/\/|mailto:).+?)((?:[:?]|\.+)?(jpg|png|bmp|jpeg|gif)(?:\s|$)|&gt;|[)"',])/g
   z = (h) ->
     if h.match(/.*(http.*jpg|png|bmp|jpeg|gif)/)
-      h.replace(x, "$1<a href=\"<``>://$2$3\"><img src=\"<``>://$2$3\" onerror=\"Octochat.Views.Room.swapFailedToLoadImage(this) \" height=\"200\" class=\"chatted\" /></a>").replace(y, "$1<a href=\"$2$3\"><img src=\"$2$3\" onerror=\"Octochat.Views.Room.swapFailedToLoadImage(this) \" height=\"200\" class=\"chatted\" /></a>").replace /"<``>/g, "\"http"
+      h.replace(x, "$1<a href=\"<``>://$2$3\"><img src=\"<``>://$2$3\" onerror=\"swapFailedToLoadImage(this) \" height=\"200\" class=\"imageified\" /></a>").replace(y, "$1<a href=\"$2$3\"><img src=\"$2$3\" onerror=\"swapFailedToLoadImage(this) \" height=\"200\" class=\"imageified\" /></a>").replace /"<``>/g, "\"http"
     else
       h
 

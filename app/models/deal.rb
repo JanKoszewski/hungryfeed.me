@@ -14,10 +14,9 @@ class Deal < ActiveRecord::Base
   end
 
   def find_deal_emails
-    unless deal_emails = DealEmail.find_by_deal_link(self.link).nil?
-      deal_emails.each do |deal_email|
-        deal_email.deal_id = self.id
-      end
+    deal_emails = DealEmail.where(:deal_link => self.link)
+    unless deal_emails.empty?
+      deal_emails.each { |deal_email| deal_email.update_attributes(:deal_id => self.id) }
     end
   end
 

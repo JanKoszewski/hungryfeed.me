@@ -6,6 +6,9 @@ jQuery ->
   
   $(".iframe").colorbox({iframe:true, width:"80%", height:"80%"});
 
+  swapFailedToLoadImage: (img) ->
+    $(img).attr('src', "/image_not_found.jpeg")
+
   if $('#tweets').length
     new TweetsPager()
     
