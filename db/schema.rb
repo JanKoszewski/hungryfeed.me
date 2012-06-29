@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120628210212) do
+ActiveRecord::Schema.define(:version => 20120628224138) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -25,6 +25,14 @@ ActiveRecord::Schema.define(:version => 20120628210212) do
   add_index "authentications", ["access_token"], :name => "index_authentications_on_access_token"
   add_index "authentications", ["uid"], :name => "index_authentications_on_uid"
   add_index "authentications", ["user_id"], :name => "index_authentications_on_user_id"
+
+  create_table "deal_emails", :force => true do |t|
+    t.integer  "deal_id"
+    t.string   "email"
+    t.string   "deal_link"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "deals", :force => true do |t|
     t.string   "link"

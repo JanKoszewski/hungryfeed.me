@@ -17,9 +17,12 @@
   <% else %>
   	<%= link_to "Login with Twitter to reply!", login_path, :class => "btn btn-medium btn-primary" %>
   <% end %>
+  <%= render 'inline_form', :tweet => tweet %>
 <% end %>
 </div>
 
 <script type="text/html" id="tweet_template">
   <%= render 'tweet' %>
 </script>
+
+<%= render 'sidebar_form' %>

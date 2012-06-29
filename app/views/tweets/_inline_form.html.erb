@@ -1,0 +1,9 @@
+<%= form_for(@deal_email) do |f| %>
+	<%= f.hidden_field :deal_id, :value => tweet.deal.id %>
+	<%= f.hidden_field :deal_link, :value => tweet.deal.link %>
+
+  <%= f.text_field :email, :placeholder => "your email address here" %>
+
+  <%= f.submit "Email me about this deal!", class: "btn btn-medium btn-primary" %>
+  
+<% end %>

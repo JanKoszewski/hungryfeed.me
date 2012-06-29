@@ -1,5 +1,6 @@
 class TweetsController < ApplicationController
   def index
+    @deal_email = DealEmail.new
     @tweets = Tweet.order("created_at DESC").limit(10)
     @tweets = @tweets.offset((params[:page].to_i-1)*10) if params[:page].present?
     respond_to do |format|

@@ -1,0 +1,10 @@
+<%= form_for(@deal_email) do |f| %>
+	<%= f.label :deal_link %><br />
+  <%= f.text_field :deal_link, :placeholder => "link to deal" %><br />
+
+  <%= f.label :email %><br />
+  <%= f.text_field :email, :placeholder => "your email address here" %><br />
+
+  <%= f.submit "Email Me!", class: "btn btn-medium btn-primary" %>
+  
+<% end %>
