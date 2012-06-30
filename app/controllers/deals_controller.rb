@@ -1,8 +1,7 @@
 class DealsController < ApplicationController
 
 	def index
-    @deals = Deal.order("purchased DESC").limit(10)
-    @deals = @deals.offset((params[:page].to_i-1)*10) if params[:page].present?
+    @deals = Deal.order("purchased DESC")
     respond_to do |format|
 	    format.html
 	    format.json do

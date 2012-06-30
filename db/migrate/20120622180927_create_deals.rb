@@ -7,5 +7,7 @@ class CreateDeals < ActiveRecord::Migration
 
       t.timestamps
     end
+
+   add_index :deals, :link
   end
 end

@@ -4,9 +4,11 @@ class Tweet < ActiveRecord::Base
   belongs_to :deal
   belongs_to :user
   has_many :tweet_responses
+  has_many :deal_emails
 
   after_create :set_user_id
   after_create :broadcast_tweet
+  after_create :email_deal
 
   def find_or_create_user
     User.find_or_create_by_twitter_username(self.twitter_username)
@@ -19,5 +21,19 @@ class Tweet < ActiveRecord::Base
 
   def broadcast_tweet
     broadcast "/tweets/new", self
+  end
+
+  def find_deal_emails
+    deal_emails = DealEmail.where(:link => self.deal.link)
+    unless deal_emails.empty?
+      deal_emails.each { |deal_email| deal_email.update_attributes(:deal_id => self.id) }
+    end
+  end
+
+  def email_deal
+    find_deal_emails
+    self.deal_emails.each do |deal_email|
+      DealMailer.deal_email(deal_email).deliver
+    end
   end
 end

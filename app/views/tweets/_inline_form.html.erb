@@ -1,6 +1,6 @@
 <%= form_for(@deal_email) do |f| %>
 	<%= f.hidden_field :deal_id, :value => tweet.deal.id %>
-	<%= f.hidden_field :deal_link, :value => tweet.deal.link %>
+	<%= f.hidden_field :link, :value => tweet.deal.link %>
 
   <%= f.text_field :email, :placeholder => "your email address here" %>
 

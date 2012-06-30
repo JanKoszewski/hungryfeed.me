@@ -3,8 +3,36 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 jQuery ->
-  if $('#deals').length
-    new DealsPager()
+
+  $(".iframe").colorbox({iframe:true, width:"80%", height:"80%"});
+
+  $ ->
+  faye = new Faye.Client("http://localhost:9292/faye")
+
+  faye.subscribe "/deals/new", (deal) ->
+    if $("#deals").find($("#"+ deal.id)).length
+      console.log("deal found!")
+    else
+      new_deal = $("#deals").prepend(Mustache.to_html($("#deal_template").html(), deal))
+
+
+  faye.subscribe "/tweets/new", (tweet) ->
+    if $("#deals").find($("#"+ tweet.deal_id)).length
+      console.log("deal found from tweet!")
+      new_tweet = $("#"+tweet.deal_id).append(Mustache.to_html($("#tweet_template").html(), tweet))
+      if $("meta[name=current-user-name]").attr("content")
+        new_tweet.append "<a href=\"/tweet_responses/new." + tweet.id + "\" class=\"iframe btn btn-primary\" id=\"tweet_response\">Respond to tweet</a>"
+        $(".iframe").colorbox
+          iframe: true
+          width: "80%"
+          height: "80%"
+      else
+        new_tweet.append "<a href=\"/auth/twitter\" class=\"btn btn-medium btn-primary\">Login with Twitter to reply!</a>"
+
+    else
+      console.log("cannot find deal!")
+      console.log tweet
+
     
 class DealsPager
   constructor: (@page = 1) ->
