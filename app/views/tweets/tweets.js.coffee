@@ -7,21 +7,20 @@ jQuery ->
   $(".iframe").colorbox({iframe:true, width:"80%", height:"80%"});
 
   $ ->
-  faye = new Faye.Client("http://localhost:9292/faye")
-  faye.subscribe "/tweets/new", (tweet) ->
-      new_tweet = undefined
-      new_tweet = $("#tweets").prepend(Mustache.to_html($("#tweet_template").html(), tweet))
-      if $("meta[name=current-user-name]").attr("content")
-        $(".tweet").first().append "<a href=\"/tweet_responses/new." + tweet.id + "\" class=\"iframe btn btn-primary\" id=\"tweet_response\">Respond to tweet</a>"
-        $(".iframe").colorbox
-          iframe: true
-          width: "80%"
-          height: "80%"
-      else
-        $(".tweet").first().append "<a href=\"/auth/twitter\" class=\"btn btn-medium btn-primary\">Login with Twitter to reply!</a>"
 
-  swapFailedToLoadImage: (img) ->
-    $(img).attr('src', "/image_not_found.jpeg")
+  pusher = new Pusher("<%= Pusher.key %>")
+  channel = pusher.subscribe("tweets")
+  channel.bind "new_tweet", (tweet) ->
+    console.log(tweet)
+    new_tweet = $("#tweets").prepend(Mustache.to_html($("#tweet_template").html(), tweet))
+    if $("meta[name=current-user-name]").attr("content")
+      $(".tweet").first().append "<a href=\"/tweet_responses/new." + tweet.id + "\" class=\"iframe btn btn-primary\" id=\"tweet_response\">Respond to tweet</a>"
+      $(".iframe").colorbox
+        iframe: true
+        width: "80%"
+        height: "80%"
+    else
+      $(".tweet").first().append "<a href=\"/auth/twitter\" class=\"btn btn-medium btn-primary\">Login with Twitter to reply!</a>"
 
   if $('#tweets').length
     new TweetsPager()

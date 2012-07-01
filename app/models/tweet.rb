@@ -20,7 +20,8 @@ class Tweet < ActiveRecord::Base
   end
 
   def broadcast_tweet
-    broadcast "/tweets/new", self
+    # broadcast "/tweets/new", self
+    Pusher['tweets'].trigger!('new_tweet', self)
   end
 
   def find_deal_emails

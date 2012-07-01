@@ -7,16 +7,19 @@ jQuery ->
   $(".iframe").colorbox({iframe:true, width:"80%", height:"80%"});
 
   $ ->
-  faye = new Faye.Client("http://localhost:9292/faye")
 
-  faye.subscribe "/deals/new", (deal) ->
+  pusher = new Pusher("<%= Pusher.key %>")
+  deal_channel = pusher.subscribe("deals")
+  deal_channel.bind "new_deal", (deal) ->
     if $("#deals").find($("#"+ deal.id)).length
       console.log("deal found!")
     else
       new_deal = $("#deals").prepend(Mustache.to_html($("#deal_template").html(), deal))
-      new_deal.append(Mustache.to_html($("#deal_form_template").html(), deal))
+      $("#"+deal.id + " .tweet").append(Mustache.to_html($("#deal_form_template").html(), deal))
+      console.log("Made it!")
 
-  faye.subscribe "/tweets/new", (tweet) ->
+  tweet_channel = pusher.subscribe("tweets")
+  tweet_channel.bind "new_tweet", (tweet) ->
     if $("#deals").find($("#"+ tweet.deal_id)).length
       console.log("deal found from tweet!")
       new_tweet = $("#"+tweet.deal_id).append(Mustache.to_html($("#tweet_template").html(), tweet))
@@ -32,14 +35,10 @@ jQuery ->
     else
       console.log("cannot find deal!")
 
-    if $("#"+ tweet.deal_id).find($("form")).length
-      form = $("#"+ tweet.deal_id).find($("form"))
-      form.detach()
-      form.insertAfter($("#"+ tweet.deal_id+" .tweet:last-child"))
-      console.log("Form moved!")
+    if $("#deals").find($("#new_deal_email-"+tweet.deal_id)).length
+      console.log("form found!")
     else
-      console.log("Something went wrong!")
-      
+      console.log("something went wrong!")
     
 class DealsPager
   constructor: (@page = 1) ->

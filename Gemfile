@@ -16,6 +16,7 @@ gem 'faye'
 gem 'mustache'
 gem 'jbuilder'
 gem 'twitter'
+gem 'pusher'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
