@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120629143002) do
+ActiveRecord::Schema.define(:version => 20120701172559) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -32,8 +32,10 @@ ActiveRecord::Schema.define(:version => 20120629143002) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.string   "link"
+    t.integer  "deal_id"
   end
 
+  add_index "deal_emails", ["deal_id"], :name => "index_deal_emails_on_deal_id"
   add_index "deal_emails", ["link"], :name => "index_deal_emails_on_link"
   add_index "deal_emails", ["tweet_id"], :name => "index_deal_emails_on_tweet_id"
 

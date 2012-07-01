@@ -1,6 +1,7 @@
 class DealsController < ApplicationController
 
 	def index
+		@deal_email = DealEmail.new
     @deals = Deal.order("purchased DESC")
     respond_to do |format|
 	    format.html

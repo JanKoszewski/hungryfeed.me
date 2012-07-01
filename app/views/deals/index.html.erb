@@ -6,12 +6,13 @@
 	<% end %>
 <% end %>
 
+<% include_javascript 'deals/deals.js.coffee' %>
+
 <title>"Deals"</title>
 
 <h1>Deals</h1>
 <div id="deals" data-json-url="<%= deals_url(:format => :json) %>">
 	<% @deals.each do |deal| %>
-	<div class="deal" id="<%= deal.id %>">
 	  <%= render "deal", mustache: deal_for_mustache(deal) %>
 	  <% deal.tweets.each do |tweet| %>
 	  	<%= render "tweet", mustache: tweet_for_mustache(tweet) %>
@@ -20,8 +21,10 @@
 		  <% else %>
 		  	<%= link_to "Login with Twitter to reply!", login_path, :class => "btn btn-medium btn-primary" %>
 		  <% end %>
+		  </div>
 		<% end %>
-	</div>
+		<%= render 'inline_form', :deal => deal  %>
+		</div>
 	<% end %>
 </div>
 
@@ -31,4 +34,8 @@
 
 <script type="text/html" id="tweet_template">
   <%= render 'tweet' %>
+</script>
+
+<script type="text/html" id="deal_form_template">
+  <%= render 'deal_form' %>
 </script>

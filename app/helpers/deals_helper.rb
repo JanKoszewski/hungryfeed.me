@@ -15,4 +15,11 @@ module DealsHelper
   		tweet_for_mustache(tweet)
   	end
   end
+
+  def inline_form_for_mustache(deal)
+    {
+      id: deal.id,
+      url: deal.link
+    }
+  end
 end

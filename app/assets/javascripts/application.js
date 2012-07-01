@@ -13,22 +13,4 @@
 //= require jquery
 //= require jquery_ujs
 //= require mustache
-//= require_tree .
-
-$(function() {
-  var faye = new Faye.Client('http://localhost:9292/faye');
-  faye.subscribe('/deals/new', function (deal) {
-    $('#deals').prepend(Mustache.to_html($('#deal_template').html(), deal));
-    console.log(deal);
-  });
-  faye.subscribe('/tweets/new', function (tweet) {
-    var new_tweet;
-		new_tweet = $('#tweets').prepend(Mustache.to_html($('#tweet_template').html(), tweet));
-		if ($("meta[name=current-user-name]").attr("content")) {
-		  $('.tweet').first().append('<a href="/tweet_responses/new.'+tweet.id+'" class="iframe btn btn-primary" id="tweet_response">Respond to tweet</a>');
-      $(".iframe").colorbox({iframe:true, width:"80%", height:"80%"});
-		} else {
-		  $('.tweet').first().append('<a href="/auth/twitter" class="btn btn-medium btn-primary">Login with Twitter to reply!</a>');
-		};
-  });
-});
+//= require_directory ./global

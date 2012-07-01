@@ -1,5 +1,5 @@
 <%= form_for(@deal_email) do |f| %>
-
+	
 	<% if @deal_email.errors.any? %>
     <div id="error_explanation">
       <div class="alert alert-error">
@@ -12,13 +12,12 @@
       </ul>
     </div>
   <% end %>
-  
-	<%= f.label :link %><br />
-  <%= f.text_field :link, :placeholder => "link to deal" %><br />
 
-  <%= f.label :email %><br />
-  <%= f.text_field :email, :placeholder => "your email address here" %><br />
+	<%= f.hidden_field :deal_id, :value => deal.id %>
+	<%= f.hidden_field :link, :value => deal.link %>
 
-  <%= f.submit "Email Me!", class: "btn btn-medium btn-primary" %>
+  <%= f.text_field :email, :placeholder => "your email address here" %>
+
+  <%= f.submit "Email me about this deal!", class: "btn btn-medium btn-primary" %>
   
 <% end %>

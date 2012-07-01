@@ -24,9 +24,11 @@ class Tweet < ActiveRecord::Base
   end
 
   def find_deal_emails
-    deal_emails = DealEmail.where(:link => self.deal.link)
+    deal_emails = DealEmail.where(:deal_id => self.deal.id)
     unless deal_emails.empty?
-      deal_emails.each { |deal_email| deal_email.update_attributes(:deal_id => self.id) }
+      deal_emails.each do |deal_email| 
+        deal_email.update_attributes(:deal_id => self.deal.id, :tweet_id => self.id)
+      end
     end
   end
 
