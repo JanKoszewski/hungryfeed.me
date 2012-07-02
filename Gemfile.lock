@@ -67,10 +67,11 @@ GEM
     em-socksify (0.2.0)
       eventmachine (>= 1.0.0.beta.4)
     erubis (2.7.0)
-    eventmachine (1.0.0.rc.2)
+    eventmachine (1.0.0.rc.4)
+    excon (0.14.2)
     execjs (1.4.0)
       multi_json (~> 1.0)
-    fabrication (2.0.2)
+    fabrication (2.0.3)
     faker (1.0.1)
       i18n (~> 0.4)
     faraday (0.8.1)
@@ -86,12 +87,20 @@ GEM
       eventmachine (>= 0.12.0)
     ffi (1.0.11)
     growl (1.0.3)
-    guard (1.2.1)
+    guard (1.2.2)
       listen (>= 0.4.2)
       thor (>= 0.14.6)
     guard-rspec (1.1.0)
       guard (>= 1.1)
     hashie (1.2.0)
+    heroku (2.28.7)
+      heroku-api (~> 0.2.6)
+      launchy (>= 0.3.2)
+      netrc (~> 0.7.5)
+      rest-client (~> 1.6.1)
+      rubyzip
+    heroku-api (0.2.6)
+      excon (~> 0.14.0)
     hike (1.2.1)
     http_parser.rb (0.5.3)
     httparty (0.8.3)
@@ -138,6 +147,7 @@ GEM
     mysql2 (0.3.11)
     net-http-digest_auth (1.2.1)
     net-http-persistent (2.7)
+    netrc (0.7.5)
     nokogiri (1.5.5)
     ntlm-http (0.1.1)
     oauth (0.4.6)
@@ -199,6 +209,8 @@ GEM
       redis (>= 2.0.1)
       resque (>= 1.8.0)
       rufus-scheduler
+    rest-client (1.6.7)
+      mime-types (>= 1.16)
     rspec (2.10.0)
       rspec-core (~> 2.10.0)
       rspec-expectations (~> 2.10.0)
@@ -215,7 +227,7 @@ GEM
     rubyzip (0.9.9)
     rufus-scheduler (2.0.17)
       tzinfo (>= 0.3.23)
-    sass (3.1.19)
+    sass (3.1.20)
     sass-rails (3.2.5)
       railties (~> 3.2.0)
       sass (>= 3.1.10)
@@ -241,12 +253,12 @@ GEM
     treetop (1.4.10)
       polyglot
       polyglot (>= 0.3.1)
-    twitter (3.0.1)
+    twitter (3.0.2)
       faraday (~> 0.8)
       multi_json (~> 1.3)
       simple_oauth (~> 0.1.6)
     tzinfo (0.3.33)
-    uglifier (1.2.5)
+    uglifier (1.2.6)
       execjs (>= 0.3.0)
       multi_json (~> 1.3)
     unf (0.0.5)
@@ -275,6 +287,7 @@ DEPENDENCIES
   growl
   guard
   guard-rspec
+  heroku
   jbuilder
   jquery-rails
   klout
