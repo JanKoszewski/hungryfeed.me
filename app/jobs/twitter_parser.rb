@@ -4,7 +4,7 @@ require 'mechanize'
 
 class TwitterParser
   @queue = :twitter_parser
-  TWEET_REGEX = /((?:http|https):\/\/[a-z0-9]+(?:[\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(?:(?::[0-9]{1,5})?\/[^\s]*)?)+( via @LivingSocial)/
+  TWEET_REGEX = /((?:http|https):\/\/[a-z0-9]+(?:[\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(?:(?::[0-9]{1,5})?\/[^\s]*)?)/
   LINK_VALIDATION_REGEX = /livingsocial.com\/(\w+)/
 
   def self.perform(tweet_array)
@@ -54,7 +54,7 @@ class TwitterParser
   end
 
   def self.validate_deal_with(link)
-    unless link.match(LINK_VALIDATION_REGEX)[1] == "events"
+    if link.match(LINK_VALIDATION_REGEX) && link.match(LINK_VALIDATION_REGEX)[1] != "events"
       true
     end
   end

@@ -11,20 +11,24 @@
 
 <title>"Tweets"</title>
 
-<h1>Tweets</h1>
-<div id="tweets" data-json-url="<%= tweets_url(:format => :json) %>">
-<% @tweets.each do |tweet| %>
-  <%= render "tweet", mustache: tweet_for_mustache(tweet) %>
-  <% if signed_in? %>
-  	<%= link_to "Respond to tweet", new_tweet_response_path(tweet), :id => "tweet_response", :class => 'iframe btn btn-primary' %>
-  <% else %>
-  	<%= link_to "Login with Twitter to reply!", login_path, :class => "btn btn-medium btn-primary" %>
+<div id="main">
+  <h1>Tweets</h1>
+  <div id="tweets" data-json-url="<%= tweets_url(:format => :json) %>">
+  <% @tweets.each do |tweet| %>
+    <%= render "tweet", mustache: tweet_for_mustache(tweet) %>
+    <% if signed_in? %>
+    	<%= link_to "Respond to tweet", new_tweet_response_path(tweet), :id => "tweet_response", :class => 'iframe btn btn-primary' %>
+    <% else %>
+    	<%= link_to "Login with Twitter to reply!", login_path, :class => "btn btn-medium btn-primary" %>
+    <% end %>
   <% end %>
-<% end %>
+  </div>
+
+  <script type="text/html" id="tweet_template">
+    <%= render 'tweet' %>
+  </script>
+
+  <div class="sidebar">
+    <%= render 'sidebar_form' %>
+  </div>
 </div>
-
-<script type="text/html" id="tweet_template">
-  <%= render 'tweet' %>
-</script>
-
-<%= render 'sidebar_form' %>

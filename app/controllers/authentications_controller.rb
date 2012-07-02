@@ -6,19 +6,25 @@ class AuthenticationsController < ApplicationController
   def create
     omniauth = request.env["omniauth.auth"]
     authentication = Authentication.find_by_provider_and_uid(omniauth['provider'], omniauth['uid'])
-    if authentication
+    if authentication && authentication.user.present?
       flash[:notice] = "Signed in successfully."
       sign_in_and_redirect(:user, authentication.user)
+    elsif current_user
+      current_user.authentications.create(:provider => omniauth['provider'], 
+                                          :uid => omniauth['uid'],
+                                          :access_token => omniauth["credentials"]["token"])
+      flash[:notice] = "Authentication successful."
+      redirect_to authentications_url
     else
-      user = User.where(:twitter_username => omniauth["info"]["nickname"]).first_or_initialize
+      user = User.where(:twitter_username => omniauth["info"]["nickname"],
+                        :oauth_token => omniauth["credentials"]["token"],
+                        :oauth_token_secret => omniauth["credentials"]["secret"]).first_or_initialize
       user.authentications.build(:provider => omniauth ['provider'], 
                                  :uid => omniauth['uid'], 
                                  :access_token => omniauth["credentials"]["token"])
-      user.oauth_token = omniauth["credentials"]["token"]
-      user.oauth_token_secret = omniauth["credentials"]["secret"]
       user.save!
       flash[:notice] = "Signed in successfully."
-      sign_in_and_redirect(:user, user)
+      sign_in_and_redirect(:user, tweets_path)
     end
     session[:auth] = current_user.authentication_token
   end
@@ -28,7 +34,7 @@ class AuthenticationsController < ApplicationController
     @authentication.destroy
     session.delete("auth")
     flash[:notice] = "Successfully destroyed authentication."
-    redirect_to authentications_url
+    redirect_to main_path
   end
 
   private 

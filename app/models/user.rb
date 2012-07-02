@@ -18,13 +18,14 @@ class User < ActiveRecord::Base
     Klout.api_key = KLOUT_API_KEY
     begin
       klout_id = Klout::Identity.find_by_screen_name(self.twitter_username)
-    rescue Exception => e
-      unless e
-        Klout::User.new(klout_id.id).score.score.to_i
-      else
-        0
-      end
+      Klout::User.new(klout_id.id).score.score.to_i
+    rescue Exception
+      0
     end
+  end
+
+  def broadcast_user
+    Pusher['users'].trigger!('user_score', self)
   end
 
   def set_klout_score
