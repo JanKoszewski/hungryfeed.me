@@ -6,14 +6,18 @@
 #login_buttons
 {
   margin: 0 auto;
+  padding: 30% 35% 30% 35%;
 }
 
 #login-button
 {
+  margin: 0 auto;
 }
 
 #login-override-button
 {
+  margin-left: 10px;
+  margin-top: 10px;
 }
 
 .tweet 
