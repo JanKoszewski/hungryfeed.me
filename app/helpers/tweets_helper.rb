@@ -7,7 +7,7 @@ module TweetsHelper
       twitter_username: tweet.twitter_username,
       content: tweet.content,
       twitter_user_image: tweet.twitter_user_image,
-      klout_score: tweet.user.klout_score
+      klout_score: tweet.klout_score
     }
   end
 end
