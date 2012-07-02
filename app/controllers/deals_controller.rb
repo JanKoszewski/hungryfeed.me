@@ -2,7 +2,7 @@ class DealsController < ApplicationController
 
 	def index
 		@deal_email = DealEmail.new
-    @deals = Deal.order("purchased DESC")
+    @deals = Deal.order("created_at DESC")
     respond_to do |format|
 	    format.html
 	    format.json do
