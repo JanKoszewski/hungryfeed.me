@@ -10,9 +10,4 @@ module ApplicationHelper
   def current_klout_score_tag(current_user)
     tag('meta', name: 'current-user-klout-score', content: current_user.klout_score)
   end
-
-  def include_javascript (file)
-    s = " <script type=\"text/javascript\">" + render(:file => file) + "</script>"
-    content_for(:head, raw(s))
-	end
 end
