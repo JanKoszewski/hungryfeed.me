@@ -35,7 +35,9 @@ jQuery ->
     else
       console.log("cannot find deal!")
 
-    if $("#deals").find($(".new_deal_email-"+tweet.deal_id)).length
+    if $("#deals").find($("#new_deal_email-"+tweet.deal_id)).length
+      form = $("#deals").find($("#new_deal_email-"+tweet.deal_id))
+      $(".deal #tweet-"+tweet.id).parent().after(form)
       console.log("form found!")
     else
       console.log("something went wrong!")
