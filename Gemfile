@@ -1,7 +1,6 @@
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.3'
-gem 'sqlite3'
 gem 'mysql2'
 gem 'omniauth'
 gem 'jquery-rails'
@@ -18,6 +17,7 @@ gem 'jbuilder'
 gem 'twitter'
 gem 'pusher'
 gem 'heroku'
+gem 'pg'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
@@ -34,4 +34,5 @@ group :development, :test do
   gem 'growl'
   gem 'guard-rspec'
   gem 'faker'
+  gem 'sqlite3'
 end
