@@ -101,7 +101,7 @@ margin: 0 0 15px 0;
 padding: 15px 0 5px 0;
 }
 
-.tweet
+#tweets .tweet
 {
   border-radius: 10px;
   padding: 25px 0 25px 0;
@@ -128,3 +128,31 @@ img
   background: transparent;
 }
 
+.deal
+{
+  margin: 20px 0 20px 0;
+}
+
+.deal #image
+{
+  float: left;
+  height: 100px;
+}
+
+.deal .tweet .details
+{
+  
+}
+
+.new_deal_email 
+{
+  padding-top:300px;
+}
+
+.deal .tweet
+{
+  margin-left: 30%;
+  display: block;
+  border-radius: 10px;
+  padding: none;
+}

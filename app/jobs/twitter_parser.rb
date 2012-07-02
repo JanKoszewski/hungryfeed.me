@@ -5,7 +5,7 @@ require 'mechanize'
 class TwitterParser
   @queue = :twitter_parser
   TWEET_REGEX = /((?:http|https):\/\/[a-z0-9]+(?:[\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(?:(?::[0-9]{1,5})?\/[^\s]*)?)/
-  LINK_VALIDATION_REGEX = /livingsocial.com\/(\w+)/
+  LINK_VALIDATION_REGEX = /www.livingsocial.com\/(\w+)/
 
   def self.perform(tweet_array)
     tweet_array.each do |tweet|
@@ -21,7 +21,11 @@ class TwitterParser
   def self.find_link(tweet)
     agent = Mechanize.new
     if data = tweet["text"].match(TWEET_REGEX)
-      link = agent.get(data[1]).uri.to_s
+      begin
+        link = agent.get(data[1]).uri.to_s
+      rescue Exception
+        false
+      end
     end
   end
 

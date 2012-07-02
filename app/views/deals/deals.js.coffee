@@ -14,9 +14,9 @@ jQuery ->
     if $("#deals").find($("#"+ deal.id)).length
       console.log("deal found!")
     else
-      new_deal = $("#deals").prepend(Mustache.to_html($("#deal_template").html(), deal))
-      $("#"+deal.id + " .tweet").append(Mustache.to_html($("#deal_form_template").html(), deal))
-      console.log("Made it!")
+      $("#deals").prepend(Mustache.to_html($("#deal_template").html(), deal))
+      $("#deals .deal").first().append("</div>")
+      $("#deals .deal").first().append(Mustache.to_html($("#deal_form_template").html(), deal))
 
   tweet_channel = pusher.subscribe("tweets")
   tweet_channel.bind "new_tweet", (tweet) ->
@@ -35,7 +35,7 @@ jQuery ->
     else
       console.log("cannot find deal!")
 
-    if $("#deals").find($("#new_deal_email-"+tweet.deal_id)).length
+    if $("#deals").find($(".new_deal_email-"+tweet.deal_id)).length
       console.log("form found!")
     else
       console.log("something went wrong!")
