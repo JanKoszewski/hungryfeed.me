@@ -6,7 +6,7 @@ class AuthenticationsController < ApplicationController
   def create
     omniauth = request.env["omniauth.auth"]
     authentication = Authentication.find_by_provider_and_uid(omniauth['provider'], omniauth['uid'])
-    if authentication && authentication.user.present?
+    if authentication
       flash[:notice] = "Signed in successfully."
       sign_in_and_redirect(:user, authentication.user)
     elsif current_user
@@ -14,7 +14,7 @@ class AuthenticationsController < ApplicationController
                                           :uid => omniauth['uid'],
                                           :access_token => omniauth["credentials"]["token"])
       flash[:notice] = "Authentication successful."
-      redirect_to authentications_url
+      redirect_to deals_path
     else
       user = User.where(:twitter_username => omniauth["info"]["nickname"],
                         :oauth_token => omniauth["credentials"]["token"],
@@ -39,8 +39,7 @@ class AuthenticationsController < ApplicationController
 
   private 
   
-  # def after_sign_in_path_for(resource)
-  #   url = SERVICES_CONFIG["octochat"]["url"]
-  #   stored_location_for(resource) || url
-  # end
+  def after_sign_in_path_for(resource)
+    stored_location_for(resource) || deals_path
+  end
 end
