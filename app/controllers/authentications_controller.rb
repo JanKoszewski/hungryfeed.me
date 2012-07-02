@@ -24,7 +24,7 @@ class AuthenticationsController < ApplicationController
                                  :access_token => omniauth["credentials"]["token"])
       user.save!
       flash[:notice] = "Signed in successfully."
-      sign_in_and_redirect(:user, tweets_path)
+      sign_in_and_redirect(:user, user)
     end
     session[:auth] = current_user.authentication_token
   end
