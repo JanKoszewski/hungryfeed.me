@@ -1,7 +1,27 @@
+#opening-statement
+{
+  margin-top: 10%;
+  padding: 5% 5% 5% 5%;
+  font-size: 20px;
+  border: 1px solid lightgray;
+}
+
+#first-line
+{
+  padding-left: 31  %;
+  margin:0 auto;
+}
+
+#second-line
+{
+  padding-left: 31  %;
+  margin:0 auto;
+}
+
 #login_buttons
 {
   margin: 0 auto;
-  padding: 30% 35% 30% 35%;
+  padding: 10% 35% 30% 35%;
 }
 
 #login-button
@@ -11,7 +31,7 @@
 
 #login-override-button
 {
-  margin-left: 10px;
+  margin-left: 12px;
   margin-top: 10px;
 }
 

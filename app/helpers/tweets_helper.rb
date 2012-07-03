@@ -16,30 +16,21 @@ module TweetsHelper
     }
   end
 
-  private 
-
   def respond_title
     if signed_in?
-      "Respond to tweet"  
-    else 
-      "Login with Twitter to Reply"
+      "Respond to tweet"
     end
   end
 
   def respond_url(tweet)
     if signed_in?
       Rails.application.routes.url_helpers.new_tweet_response_path(tweet)
-    else
-      login_path
     end
   end
 
   def button_class
     if signed_in?
       "iframe btn btn-primary cboxElement"
-    else
-      "btn btn-primary"
     end
   end
-
 end
