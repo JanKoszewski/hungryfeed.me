@@ -1,12 +1,11 @@
 class DealEmailsController < ApplicationController
 
 	def create
-		session[:return_to] ||= request.referer
 		@deal_email = DealEmail.where(params[:deal_email]).first_or_initialize
 		if @deal_email.save
-			redirect_to session[:return_to], flash[:notice] => "Will do!"
+			flash[:notice] = "Email will be sent!"
 		else
-			redirect_to session[:return_to], flash[:notice] => "No comprende :("
+			flash[:notice] = "Cannot be sent!"
 		end
 	end
 end

@@ -202,7 +202,9 @@ img
   float: right;
   border:solid 25px #FF8533; 
   background: #FF8533;
-  position: relative;
+  position: absolute;
+  margin-top: 5px;
+  margin-left: -79px;
   color: white;
   width: 30px;
   opacity: 0.85;

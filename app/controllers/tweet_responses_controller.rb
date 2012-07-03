@@ -8,9 +8,11 @@ class TweetResponsesController < ApplicationController
 	def create
 		@tweet_response = TweetResponse.new(params[:tweet_response])
 		if @tweet_response.send_to_twitter
-			render :text => "Response sent successfully"
+			flash[:notice] = "Response sent successfully"
+			render :partial => "clear_form"
 		else
-			render :text => "Response was not sent"
+      flash[:notice] = "Response was not sent"
+      render :partial => "clear_form"
 		end
 	end
 end
