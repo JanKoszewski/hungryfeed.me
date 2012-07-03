@@ -1,8 +1,3 @@
-#container
-{
-  height: 300px;
-}
-
 #login_buttons
 {
   margin: 0 auto;
@@ -30,30 +25,11 @@
   margin: 0 auto;
 }
 
-#deals .tweets
-{
-
-}
-
 body
 {
 font: normal .80em 'trebuchet ms', arial, sans-serif;
 background: #F0EFE2;
 color: #777;
-}
-
-.left
-{ 
-float: left;
-width: auto;
-margin-right: 10px;
-}
-
-.right
-{ 
-float: right; 
-width: auto;
-margin-left: 10px;
 }
 
 .sidebar
