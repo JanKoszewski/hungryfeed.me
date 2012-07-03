@@ -1,10 +1,10 @@
 <div class="tweet" id=tweet-{{id}}>
-  <h2><a href="{{url}}">{{twitter_username}}</a></h2>
+  <h2><a href="{{user_link}}">{{twitter_username}}</a></h2>
   <img src="{{twitter_user_image}}">
   <div class="details" id=details-{{id}}>
 	  <span class="content">{{content}}</span>
 	  <a class="link" href="{{url}}">Link to Tweet!</span></a>
-	  <span class="klout_score">Klout Score: {{klout_score}}</span>
+	  <span class="klout_score">Klout Score:<span class="score">{{klout_score}}</span></span>
   </div>
   <a href="{{respond_url}}" class="{{button_class}}" id="tweet_response">{{respond_title}}</a>
 </div>

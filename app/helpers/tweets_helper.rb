@@ -11,6 +11,7 @@ module TweetsHelper
       twitter_user_image: tweet.twitter_user_image,
       button_class: button_class,
       klout_score: tweet.klout_score,
+      user_link: tweet.user.twitter_link,
       content: tweet.content,
     }
   end
@@ -27,7 +28,7 @@ module TweetsHelper
 
   def respond_url(tweet)
     if signed_in?
-      Rails.application.routes.url_helpers.new_tweet_tweet_response_path(tweet)
+      Rails.application.routes.url_helpers.new_tweet_response_path(tweet)
     else
       login_path
     end

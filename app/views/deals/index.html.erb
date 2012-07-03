@@ -14,7 +14,7 @@
 	<div class='deal' id='<%= "deal_#{deal.id}" %>'>
 	  <%= render "deal", mustache: deal_for_mustache(deal) %>
 		  <% deal.tweets.each do |tweet| %>
-			  <div class='tweets' id='<%= "tweets_for_deal_#{deal.id}" %>' %>
+			  <div class='tweets' id='<%= "tweets_for_deal_#{deal.id}" %>'>
 			  	<%= render "tweet", mustache: tweet_for_mustache(tweet) %>
 				</div>
 			<% end %>
