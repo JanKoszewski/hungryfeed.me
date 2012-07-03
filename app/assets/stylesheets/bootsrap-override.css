@@ -59,31 +59,13 @@ margin-left: 10px;
 .sidebar
 { 
 position: fixed;
-top: 0;
+border-radius: 10px;
+width: 500px;
+border: 1px solid lightgray;
+top: 35%;
 left: 80%;
-float: right;
 width: 190px;;
 }
-
-.sidebar ul
-{ 
-width: 178px; 
-padding: 4px 0 0 0; 
-margin: 4px 0 30px 0;
-}
-
-.sidebar li
-{ list-style: none; 
-  padding: 0 0 7px 0; }
-
-.sidebar li a, .sidebar li a:hover
-{ padding: 0 0 0 40px;
-  display: block;
-  background: transparent url(link.png) no-repeat left center;} 
-
-.sidebar li a.selected
-{ color: #444;
-  text-decoration: none;} 
 
 #content
 { 
@@ -135,8 +117,10 @@ padding: 15px 0 5px 0;
   display: inline;
   padding-top: 10px;
   padding-bottom: 10px;
-  padding-left: 10px;
-  margin-right: 10px;
+  padding-left: 20px;
+  margin-right: 20px;
+  margin-left: 20px;
+  width: 200px;
   text-wrap: normal;
 }
 
@@ -233,6 +217,17 @@ img
   opacity: 0.85;
   display: none;
   background-color: rgba(136, 136, 136, 0.6);
+  margin-top: -10px;
+  top: 215px;
+  position: relative;
+}
+
+#tweet-klout-score-bubble
+{
+  float: right;
+  height: 30px;
+  opacity: 0.85;
+  background-color: rgba(136, 136, 136, 0.6);
   margin: 0px;
   top: 215px;
 }
@@ -241,4 +236,64 @@ img
 {
   float: right;
   margin-top: -35px;
+}
+
+.tweet_klout_score
+{
+  float: right;
+  border:solid 25px #FF8533; 
+  background: #FF8533;
+  color: white;
+  margin-top: -42px;
+  width: 30px;
+  opacity: 0.85;
+  display: inline-block;
+  font-size: 30px;
+}
+
+.tweet_details
+{
+  font-size: 16px;
+}
+
+.tweet_details .content
+{
+  width: 200px;
+}
+
+.tweet_new_deal_email
+{
+  padding-top: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  width: 300px;
+}
+
+.sidebar label 
+{
+  margin-top: 10px;
+  margin-bottom: -10px;
+}
+
+.sidebar #deal_email_link
+{
+  width: 150px;
+  margin-right: 50px;
+}
+
+.sidebar #deal_email_email
+{
+  width: 150px;
+  margin-right: 50px;
+}
+
+#tweets .tweet h2
+{
+  padding-left: 15px;
+}
+
+.tweet_content
+{
+ padding-left: 20px;
+ margin-left: 20px; 
 }

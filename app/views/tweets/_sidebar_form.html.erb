@@ -1,4 +1,4 @@
-<%= form_for(@deal_email || DealEmail.new) do |f| %>
+<%= form_for(@deal_email || DealEmail.new, :html => { :class => "tweet_new_deal_email"}) do |f| %>
 
 	<% if @deal_email && @deal_email.errors.any? %>
     <div id="error_explanation">

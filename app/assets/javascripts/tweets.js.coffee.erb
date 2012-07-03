@@ -49,14 +49,14 @@ class TweetsPager
     $(".iframe").colorbox({iframe:true, width:"80%", height:"80%"});
 
 tweetsColorer = ->
-  scores = $("#tweets").find($(".tweet .details .klout_score")).each ->
-    if $(this).text() > 50  
+  scores = $("#tweets").find($(".tweet .tweet_details .tweet_klout_score")).each ->
+    if $(this).text() >= 50  
       $(this).parent().parent().css('background','#47A3FF')
-    else if $(this).text() > 40  
+    else if $(this).text() >= 40  
       $(this).parent().parent().css('background','#70B8FF')
-    else if $(this).text() > 30
+    else if $(this).text() >= 30
       $(this).parent().parent().css('background','#99CCFF')
-    else if $(this).text() > 20
+    else if $(this).text() >= 20
       $(this).parent().parent().css('background','#C2E0FF')
     else
-      $(this).parent().parent().css('background-color', '#D6EBFF')
+      $(this).parent().parent().css('background-color', '#EBF5FF')
