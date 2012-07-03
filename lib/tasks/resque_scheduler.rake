@@ -9,6 +9,12 @@ namespace :resque do
 
     # you probably already have this somewhere
 
+    if Rails.env.staging? || Rails.env.production?
+        uri = URI.parse(ENV["REDISTOGO_URL"])
+        Resque.redis = Redis.new(:host => uri.host, :port => uri.port, :password => uri.password, :thread_safe => true)
+    else
+        Resque.redis = "localhost:6379:1"
+    end
     # If you want to be able to dynamically change the schedule,
     # uncomment this line.  A dynamic schedule can be updated via the
     # Resque::Scheduler.set_schedule (and remove_schedule) methods.
