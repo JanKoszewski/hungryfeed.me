@@ -297,3 +297,8 @@ img
  padding-left: 20px;
  margin-left: 20px; 
 }
+
+#tweet_content_response
+{
+  width: 500px;
+}
