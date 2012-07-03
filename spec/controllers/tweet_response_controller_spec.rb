@@ -1,5 +1,5 @@
 require 'spec_helper'
 
-describe TweetResponseController do
+describe TweetResponsesController do
 
 end

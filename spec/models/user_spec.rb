@@ -30,7 +30,7 @@ describe User do
     end
 
     it "returns a klout score for a particular user" do
-      user.find_klout_score.should == 41
+      user.find_klout_score.should == 40
     end
   end
 
@@ -38,7 +38,7 @@ describe User do
 
     it "sets a user's klout score to the found klout score" do
       user.set_klout_score
-      user.klout_score.should == 41
+      user.klout_score.should == 40
     end
 
   end
