@@ -5,7 +5,7 @@ jQuery ->
 
   $ ->
 
-  pusher = new Pusher("<%= Pusher.key %>")
+  pusher = new Pusher("aafb6670cc00ac6045f1")
   tweet_channel = pusher.subscribe("tweets")
   tweet_channel.bind "new_tweet", (tweet) ->
     console.log(tweet)
