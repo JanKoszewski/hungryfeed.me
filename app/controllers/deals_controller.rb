@@ -1,7 +1,6 @@
 class DealsController < ApplicationController
 
 	def index
-		@deal_email = DealEmail.new
     @deals = Deal.order("created_at DESC")
     respond_to do |format|
 	    format.html
@@ -9,9 +8,5 @@ class DealsController < ApplicationController
 	      render json: @deals.map { |t| view_context.deal_for_mustache(t) }
 	    end
 	  end
-  end
-
-  def show
-    @deal = deal.find(params[:id])   
   end
 end

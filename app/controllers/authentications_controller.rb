@@ -8,33 +8,14 @@ class AuthenticationsController < ApplicationController
     authentication = Authentication.find_by_provider_and_uid(omniauth['provider'], omniauth['uid'])
     if authentication
       flash[:notice] = "Signed in successfully."
-      sign_in_and_redirect(:user, user)
-    elsif current_user
-      current_user.authentications.create(:provider => omniauth['provider'], 
-                                          :uid => omniauth['uid'],
-                                          :access_token => omniauth["credentials"]["token"])
-      flash[:notice] = "Authentication successful."
-      redirect_to deals_path
+      sign_in_and_redirect(:user, authentication.user)
     else
       user = User.where(:twitter_username => omniauth["info"]["nickname"]).first_or_initialize
-      user.authentications.build(:provider => omniauth ['provider'], 
-                                 :uid => omniauth['uid'], 
-                                 :access_token => omniauth["credentials"]["token"])
-      user.oauth_token = omniauth["credentials"]["token"]
-      user.oauth_token_secret = omniauth["credentials"]["secret"]
+      user.build_authentication(omniauth)
       user.save!
       flash[:notice] = "Signed in successfully."
       sign_in_and_redirect(:user, user)
     end
-    session[:auth] = current_user.authentication_token
-  end
-
-  def destroy
-    @authentication = current_user.authentications.find(params[:id])
-    @authentication.destroy
-    session.delete("auth")
-    flash[:notice] = "Successfully destroyed authentication."
-    redirect_to main_path
   end
 
   private 

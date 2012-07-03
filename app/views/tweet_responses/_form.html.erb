@@ -1,9 +1,9 @@
 <%= form_for(@tweet_response) do |f| %>
 	<%= f.hidden_field :user_id, :value => current_user.id %>
-	<%= f.hidden_field :tweet_id, :value => @tweet.id %>
+	<%= f.hidden_field :tweet_id, :value => @tweet_response.tweet.id %>
 
   <%= f.label :content %><br />
-  <%= f.text_field :content, :value => "@#{@tweet.twitter_username}" %><br />
+  <%= f.text_field :content, :value => "@#{@tweet_response.tweet.twitter_username}" %><br />
 
   <%= f.submit "Tweet Reply", class: "btn btn-large btn-primary" %>
   

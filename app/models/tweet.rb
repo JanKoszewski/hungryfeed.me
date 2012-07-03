@@ -1,26 +1,22 @@
 class Tweet < ActiveRecord::Base
-  include Broadcast
   attr_accessible :content, :twitter_username, :twitter_user_image, :deal_id, :user_id, :link, :klout_score
   belongs_to :deal
   belongs_to :user
   has_many :tweet_responses
-  has_many :deal_emails
 
   before_create :set_user_id
   after_create :broadcast_tweet
-  after_create :email_deal
+  after_create :send_tweet_notificaiton
 
   def find_or_create_user
     User.find_or_create_by_twitter_username(self.twitter_username)
   end
 
   def set_user_id
-    user_id = find_or_create_user.id
-    self.user_id = user_id
+    self.user_id = find_or_create_user.id
   end
 
   def broadcast_tweet
-    # broadcast "/tweets/new", self
     self.update_attributes(:klout_score => self.user.klout_score)
     Pusher['tweets'].trigger!('new_tweet', self)
   end
@@ -34,7 +30,7 @@ class Tweet < ActiveRecord::Base
     end
   end
 
-  def email_deal
+  def send_tweet_notificaiton
     find_deal_emails
     self.deal_emails.each do |deal_email|
       DealMailer.deal_email(deal_email).deliver

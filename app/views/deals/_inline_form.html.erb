@@ -1,6 +1,6 @@
-<%= form_for(@deal_email, :html => { :id => "new_deal_email-#{deal.id}" } ) do |f| %>
+<%= form_for(@deal_email || DealEmail.new, :html => { :id => "new_deal_email-#{deal.id}" } ) do |f| %>
 	
-	<% if @deal_email.errors.any? %>
+	<% if @deal_email && @deal_email.errors.any? %>
     <div id="error_explanation">
       <div class="alert alert-error">
         The form contains <%= pluralize(@deal_email.errors.count, "error") %>.
