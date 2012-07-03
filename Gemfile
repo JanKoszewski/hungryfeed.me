@@ -18,7 +18,6 @@ gem 'twitter'
 gem 'pusher'
 gem 'heroku'
 gem 'pg'
-gem 'redis'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
