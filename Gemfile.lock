@@ -301,6 +301,7 @@ DEPENDENCIES
   pg
   pusher
   rails (= 3.2.3)
+  redis
   resque
   resque-scheduler
   rspec-rails
