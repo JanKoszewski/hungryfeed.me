@@ -5,9 +5,13 @@ $ bundle install
 $ rake db:migrate db:test:prepare
 $ brew install redis
 
+
 In another window or background process:
 
 $ redis-server /usr/local/etc/redis.conf
+
+
+$ rails
 
 
 In another window or background process:
