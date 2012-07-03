@@ -30,6 +30,11 @@
   margin: 0 auto;
 }
 
+#deals .tweets
+{
+
+}
+
 body
 {
 font: normal .80em 'trebuchet ms', arial, sans-serif;
@@ -86,6 +91,7 @@ text-align: left;
 width: 60%;
 padding: 0;
 margin: 0 auto;
+margin-top: 50px;
 }
 
 h1
@@ -117,9 +123,21 @@ padding: 15px 0 5px 0;
   margin-left: 25px;
 }
 
+.deal h2
+{
+  display: inline;
+  margin-left: 25px;
+  padding-bottom: 10px;
+}
+
 .tweet .content
 {
   display: inline;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  margin-right: 10px;
+  text-wrap: normal;
 }
 
 img
@@ -135,33 +153,92 @@ img
 .deal
 {
   margin: 20px 0 20px 0;
-}
-
-.deal #image
-{
-  float: left;
-  height: 100px;
+  border: 1px solid lightgray;
+  border-radius: 10px;
+  height: 415px;
+  padding-top: 10px;
 }
 
 .deal .tweet .details
 {
-  
+  padding-left: 10px;
 }
 
 .new_deal_email 
 {
-  padding-top:300px;
+  margin-left: 335px;
+  margin-top: 20px;
 }
 
 .deal .tweet
 {
-  margin-left: 30%;
+  margin-left: 335px;
+  margin-right: 20px;
+  margin-top: 5px;
+  margin-bottom: 5px;
   display: block;
   border-radius: 10px;
-  padding: none;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
-.deals img
+.deal-image
 {
-  height: 100px;
+  border-radius: 10px;
+  margin-left: 10px;
+}
+
+#deal-email-button
+{
+  margin-top: -10px;
+  margin-left: 20px;
+}
+
+#deal_email_email
+{
+  width: 265px;
+}
+
+.purchased
+{
+  margin-left: 25px;
+  padding-top: 5px;
+  font-size: 15px;
+}
+
+#purchased
+{
+  font-weight: 800;
+  font-size: 30px;
+  margin-left: 5px;
+}
+
+.score
+{
+  float: right;
+  border:solid 25px #FF8533; 
+  background: #FF8533;
+  position: relative;
+  color: white;
+  width: 30px;
+  opacity: 0.85;
+  display: inline-block;
+  font-size: 30px;
+}
+
+#klout-score-bubble
+{
+  float: right;
+  height: 30px;
+  opacity: 0.85;
+  display: none;
+  background-color: rgba(136, 136, 136, 0.6);
+  margin: 0px;
+  top: 215px;
+}
+
+.klout_score
+{
+  float: right;
+  margin-top: -35px;
 }

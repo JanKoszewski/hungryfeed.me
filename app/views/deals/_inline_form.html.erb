@@ -15,9 +15,9 @@
 
 	<%= f.hidden_field :deal_id, :value => deal.id %>
 	<%= f.hidden_field :link, :value => deal.link %>
-
+  <div class="deal_email_pusher"></div>
   <%= f.text_field :email, :placeholder => "your email address here" %>
 
-  <%= f.submit "Email me about this deal!", class: "btn btn-medium btn-primary" %>
+  <%= f.submit "Email me about this deal!", class: "btn btn-medium btn-primary", id: "deal-email-button" %>
   
 <% end %>
