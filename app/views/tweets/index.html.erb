@@ -15,8 +15,6 @@
     <%= render "tweet", mustache: tweet_for_mustache(tweet) %>
     <% if signed_in? %>
     	<%= link_to "Respond to tweet", new_tweet_response_path(tweet), :id => "tweet_response", :class => 'iframe btn btn-primary' %>
-    <% else %>
-    	<%= link_to "Login with Twitter to reply!", login_path, :class => "btn btn-medium btn-primary" %>
     <% end %>
   <% end %>
   </div>

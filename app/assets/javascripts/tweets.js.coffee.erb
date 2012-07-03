@@ -16,9 +16,7 @@ jQuery ->
         iframe: true
         width: "80%"
         height: "80%"
-    else
-      $(".tweet").first().after "<a href=\"/auth/twitter\" class=\"btn btn-medium btn-primary\">Login with Twitter to reply!</a>"
-    tweetsColorer()
+    tweetsColorer()    
 
   if $('#tweets').length
     new TweetsPager()
