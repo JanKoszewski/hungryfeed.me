@@ -3,6 +3,7 @@ class Tweet < ActiveRecord::Base
   belongs_to :deal
   belongs_to :user
   has_many :tweet_responses
+  has_many :deal_emails
 
   before_create :set_user_id
   after_create :broadcast_tweet
