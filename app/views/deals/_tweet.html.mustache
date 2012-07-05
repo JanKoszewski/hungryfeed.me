@@ -2,9 +2,13 @@
   <h2><a href="{{user_link}}">{{twitter_username}}</a></h2>
   <img src="{{twitter_user_image}}">
   <div class="details" id=details-{{id}}>
-	  <div class="content">{{content}}</div>
-	  <a class="link" href="{{url}}">Link!</span></a>
-	  <div class="klout_score">
+		<tr class="tweet_details_table">
+	  	<td class="content">{{content}}</td>
+	  	<td class="klout_score_title">Klout Score</td>
+	  </tr>
+	  <tr>
+	  	<td class="link"><a class="tweet_link" href="{{url}}">Link!</a></td>
+	  	<div class="klout_score">
 	  	<div class="score">{{klout_score}}</div>
 	  	<img src="http://kcdn3.klout.com/static/images/score-bubble-large.png" id="klout-score-bubble"></a>
 	  </div>
