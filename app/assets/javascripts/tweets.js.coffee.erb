@@ -8,7 +8,6 @@ jQuery ->
   pusher = new Pusher("aafb6670cc00ac6045f1")
   tweet_channel = pusher.subscribe("tweets")
   tweet_channel.bind "new_tweet", (tweet) ->
-    console.log(tweet)
     new_tweet = $("#tweets").prepend(Mustache.to_html($("#tweet_template").html(), tweet))
     if $("meta[name=current-user-name]").attr("content")
       $(".tweet").first().after "<a href=\"/tweet_responses/new." + tweet.id + "\" class=\"iframe btn btn-primary\" id=\"tweet_response\">Respond to tweet</a>"
