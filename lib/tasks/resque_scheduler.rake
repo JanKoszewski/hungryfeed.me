@@ -14,9 +14,8 @@ namespace :resque do
         $resque_redis_config = { host: uri.host, port: uri.port, password: uri.password }
         Resque.redis = Redis.new $resque_redis_config
         Resque.after_fork = Proc.new {
-            ActiveRecord::Base.retrieve_connection
-            Resque.redis = Redis.new $resque_redis_config }
-        end
+          ActiveRecord::Base.retrieve_connection
+          Resque.redis = Redis.new $resque_redis_config }
     else
         Resque.redis = "localhost:6379:1"
     end
