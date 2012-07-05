@@ -1,7 +1,7 @@
 class DealsController < ApplicationController
 
 	def index
-    @deals = Deal.order("created_at DESC")
+    @deals = Deal.order("created_at DESC").limit(20)
     respond_to do |format|
 	    format.html
 	    format.json do
