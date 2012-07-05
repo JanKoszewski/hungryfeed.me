@@ -1,14 +1,10 @@
 require 'resque'
-
-if Rails.env.staging? || Rails.env.production?
-  uri = URI.parse ENV['REDISTOGO_URL']
-  $resque_redis_config = { host: uri.host, port: uri.port, password: uri.password }
-  Resque.redis = Redis.new $resque_redis_config
-  Resque.before_fork = Proc.new {
-		ActiveRecord::Base.retrieve_connection
-		Resque.redis = Redis.new $resque_redis_config }
+if Rails.env.production?
+  redis_url = ENV["REDISTOGO_URL"]
+  uri = URI.parse(redis_url)
+  REDIS = Redis.new(:host => uri.host, :port => uri.port, :password => uri.password)
 else
-	Resque.redis = "localhost:6379:1"
+  REDIS = Redis.new
 end
-
-Resque.enqueue(TwitterFeed)
+Resque.redis = REDIS
+Resque.after_fork = Proc.new { ActiveRecord::Base.establish_connection }
