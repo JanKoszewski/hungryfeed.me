@@ -20,7 +20,7 @@ jQuery ->
 
   tweet_channel = pusher.subscribe("tweets")
   tweet_channel.bind "new_tweet", (tweet) ->
-    if $("#deals").find($("#tweets_for_deal_"+ tweet.deal_id)).length and $("#deals #deal_"+tweet.deal_id+" .tweets").length > 3
+    if $("#deals").find($("#tweets_for_deal_"+ tweet.deal_id)).length and $("#deals #deal_"+tweet.deal_id+" .tweets").length < 2
       new_tweet = $("#tweets_for_deal_"+tweet.deal_id).append(Mustache.to_html($("#tweet_template").html(), tweet))
       if $("meta[name=current-user-name]").attr("content")
         $("#tweets_for_deal_"+tweet.deal_id+" #tweet-"+tweet.id+" .details").after "<a href=\"/tweet_responses/new." + tweet.id + "\" class=\"iframe btn btn-primary\" id=\"tweet_response\">Respond to tweet</a>"
