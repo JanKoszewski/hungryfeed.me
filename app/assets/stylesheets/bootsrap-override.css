@@ -1,4 +1,83 @@
-#opening-statement
+.deal 
+{
+  width: 800px;
+  margin: 0 auto;
+  height: 500px;
+}
+
+.deal-image
+{
+  float: left;
+}
+
+.deal .tweets
+{
+  float: right;
+  width: 470px;
+  overflow: scroll;
+}
+
+.deal .details
+{
+  margin-left: 330px;
+}
+
+.deal .tweet
+{
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.tweet_content
+{
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.tweet_link
+{
+  padding-left: 5px;
+}
+
+#deal_email_email
+{
+  margin-left: 30px;
+}
+
+#deal-email-button
+{
+  margin-left: 20px;
+  margin-top: -5px;
+}
+
+.number-purchased
+{
+
+}
+
+.purchased
+{
+  float: left;
+  font-weight: bold;
+  font-size: 30px;
+}
+
+.klout_score
+{
+ background: #FF8533;
+ color: white;
+ text-align: center;
+ font-weight: bold;
+ font-size: 30px;
+}
+
+.klout_score_title
+{
+  color: #FF8533;
+  font-weight: bold;
+}
+
+/*#opening-statement
 {
   margin-top: 10%;
   padding: 5% 5% 5% 5%;
@@ -109,18 +188,6 @@ padding: 15px 0 5px 0;
   padding-bottom: 10px;
 }
 
-.tweet .content
-{
-  display: inline;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  padding-left: 20px;
-  margin-right: 20px;
-  margin-left: 20px;
-  width: 200px;
-  text-wrap: normal;
-}
-
 img
 {
   float: left;
@@ -194,62 +261,6 @@ img
   margin-left: 5px;
 }
 
-.score
-{
-  float: right;
-  border:solid 25px #FF8533; 
-  background: #FF8533;
-  position: absolute;
-  margin-top: 5px;
-  margin-left: -79px;
-  color: white;
-  width: 30px;
-  opacity: 0.85;
-  display: inline-block;
-  font-size: 30px;
-}
-
-#klout-score-bubble
-{
-  float: right;
-  height: 30px;
-  opacity: 0.85;
-  display: none;
-  background-color: rgba(136, 136, 136, 0.6);
-  margin-top: -10px;
-  top: 215px;
-  position: relative;
-}
-
-#tweet-klout-score-bubble
-{
-  float: right;
-  height: 30px;
-  opacity: 0.85;
-  background-color: rgba(136, 136, 136, 0.6);
-  margin: 0px;
-  top: 215px;
-}
-
-.klout_score
-{
-  float: right;
-  margin-top: -35px;
-}
-
-.tweet_klout_score
-{
-  float: right;
-  border:solid 25px #FF8533; 
-  background: #FF8533;
-  color: white;
-  margin-top: -42px;
-  width: 30px;
-  opacity: 0.85;
-  display: inline-block;
-  font-size: 30px;
-}
-
 .tweet_details
 {
   font-size: 16px;
@@ -301,3 +312,4 @@ img
 {
   width: 500px;
 }
+*/

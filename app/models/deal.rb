@@ -6,6 +6,10 @@ class Deal < ActiveRecord::Base
   has_many :tweets
 
   def broadcast_deal
-    Pusher['deals'].trigger!('new_deal', self)
+  	if Rails.env.production?
+    	Pusher['deals'].trigger!('new_deal', self)
+    else
+    	Pusher['test_deals'].trigger!('test_new_deal', self)
+    end
   end
 end

@@ -13,11 +13,11 @@
 	<% @deals.each do |deal| %>
 	<div class='deal' id='<%= "deal_#{deal.id}" %>'>
 	  <%= render "deal", mustache: deal_for_mustache(deal) %>
-		  <% deal.tweets.each do |tweet| %>
-			  <div class='tweets' id='<%= "tweets_for_deal_#{deal.id}" %>'>
-			  	<%= render "tweet", mustache: tweet_for_mustache(tweet) %>
-				</div>
-			<% end %>
+	  	<div class='tweets' id='<%= "tweets_for_deal_#{deal.id}" %>'>
+			  <% deal.tweets.each do |tweet| %>
+				  <%= render "tweet", mustache: tweet_for_mustache(tweet) %>
+				<% end %>
+			</div>
 			<%= render 'inline_form', :deal => deal  %>
 		</div>
 	<% end %>

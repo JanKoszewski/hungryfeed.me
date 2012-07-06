@@ -6,8 +6,8 @@ jQuery ->
   $ ->
 
   pusher = new Pusher("aafb6670cc00ac6045f1")
-  deal_channel = pusher.subscribe("deals")
-  deal_channel.bind "new_deal", (deal) ->
+  deal_channel = pusher.subscribe("test_deals")
+  deal_channel.bind "test_new_deal", (deal) ->
     if $("#deals").find($("#deal_"+ deal.id)).length
       tweetsColorer()
     else
