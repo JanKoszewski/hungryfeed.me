@@ -1,8 +1,9 @@
 class TweetResponsesController < ApplicationController
 
 	def new
+		raise params.inspect
 		@tweet_response = TweetResponse.new
-		@tweet_response.tweet = Tweet.find(params[:format])
+		@tweet_response.tweet = Tweet.find(params[:tweet_id])
 	end
 
 	def create
