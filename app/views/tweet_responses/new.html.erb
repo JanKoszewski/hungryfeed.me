@@ -1,5 +1,8 @@
 <h1>Respond to Tweet</h1>
+<% if signed_in? %>
+	<%= render :partial => "form" %><br />
+	<a href='#' onclick='parent.$.colorbox.close(); return false;'>Close this window</a>
+<% else %>
+	<a href='#' onclick='parent.$.colorbox.close(); return false;' class="btn btn-large btn-primary">Please sign in first to respond to tweets!</a>
+<% end %>
 
-<%= render :partial => "form" %><br />
-
-<a href='#' onclick='parent.$.colorbox.close(); return false;'>Close this window</a>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Hungryfeed</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag 'deals_layout' %>
+	<script src="http://js.pusher.com/1.11/pusher.min.js" type="text/javascript"></script>
+  <%= csrf_meta_tags %>
+
+  <body class="containter-fluid">
+	<div id="content">
+	<% flash.each do |key, value| %>
+		<div class="alert alert-<%= key %>"><%= value %></div>
+	<% end %>
+
+	<%= yield %>
+	</div>
+</body>
+</html>
+

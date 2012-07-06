@@ -19,7 +19,11 @@ class Tweet < ActiveRecord::Base
 
   def broadcast_tweet
     self.update_attributes(:klout_score => self.user.klout_score)
-    Pusher['tweets'].trigger!('new_tweet', self)
+    if Rails.env.production?
+      Pusher['tweets'].trigger!('new_tweet', self)
+    else
+      Pusher['test_tweets'].trigger!('test_new_tweet', self)
+    end
   end
 
   def find_deal_emails

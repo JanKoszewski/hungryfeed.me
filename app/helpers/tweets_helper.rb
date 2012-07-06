@@ -23,9 +23,7 @@ module TweetsHelper
   end
 
   def respond_url(tweet)
-    if signed_in?
-      Rails.application.routes.url_helpers.new_tweet_response_path(tweet)
-    end
+    Rails.application.routes.url_helpers.new_tweet_response_path(tweet)
   end
 
   def button_class
