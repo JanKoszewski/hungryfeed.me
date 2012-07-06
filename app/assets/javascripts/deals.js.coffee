@@ -1,9 +1,13 @@
 
 jQuery ->
+  addHandlers()
 
   $(".iframe").colorbox({iframe:true, width:"80%", height:"80%"});
 
   $ ->
+
+  $(".close_button").live "click", ->
+    $.fn.colorbox.close()
 
   pusher = new Pusher("aafb6670cc00ac6045f1")
   deal_channel = pusher.subscribe("test_deals")
@@ -58,10 +62,4 @@ tweetsColorer = ->
 addHandlers = ->
   addTweetResponseHandler()
 
-addTweetResponseHandler = (tweet_id) ->
-  $("#tweet-"+tweet_id+" .tweet_details").click ->
-    $.ajax(
-      type: "GET",
-      url:  "/tweet_responses/new/#{tweet_id}",
-      data: { tweet_id: tweet_id }
-      )
+addTweetResponseHandler = ->
