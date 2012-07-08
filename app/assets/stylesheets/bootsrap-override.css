@@ -30,10 +30,17 @@
   border-radius: 10px;
 }
 
-.tweet_content
+.deal .tweet_content
 {
-  padding-top: 10px;
+  padding-top: 30px;
   padding-left: 10px;
+  padding-right: 10px;
+}
+
+.deal .tweet_user
+{
+  padding-top: 30px;
+  padding-left: 5px;
 }
 
 .tweet_link
