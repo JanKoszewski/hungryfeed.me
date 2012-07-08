@@ -1,9 +1,18 @@
-<div class="tweet" id={{id}}>
-	<img src="{{twitter_user_image}}">
-  <h2><a href="https://twitter.com/#{{twitter_username}}">{{twitter_username}}</a></h2>
-  <div class="tweet_details">
-	  <div class="content">{{content}}</div>
-	  <a class="tweet_link" href="{{url}}">Link!</span></a>
-	  <div class="tweet_klout_score">{{klout_score}}</div>
+<div class="tweet" id="tweet-{{id}}">
+  <h2><a href="{{url}}">{{twitter_username}}</a></h2>
+  <div class="tweet_details iframe" id=tweet-details-{{id}} href="/tweet_responses/new.{{id}}">
+	  <table class="tweet_details_table">
+			<tr>
+				<td class="tweet_user"><img src="{{twitter_user_image}}"></td>
+		  	<td class="tweet_content">{{content}}</td>
+		  	<td class="klout_score_title">Klout Score</td>
+		  </tr>
+		  <tr>
+		  	<td class="bottom_left_corner"></td>
+		  	<td class="bottom_middle"></td>
+		  	<td class="klout_score">{{klout_score}}</td>
+		  </tr>
+		</table>
 	</div>
+  <a href="{{respond_url}}" class="{{button_class}}" id="tweet_response">{{respond_title}}</a>
 </div>
