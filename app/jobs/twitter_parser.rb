@@ -22,7 +22,7 @@ class TwitterParser
     agent = Mechanize.new
     if data = tweet["text"].match(TWEET_REGEX)
       begin
-        link = agent.get(data[1]).uri.to_s
+        agent.get(data[1]).uri.to_s
       rescue Exception
         false
       end

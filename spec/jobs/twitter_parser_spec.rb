@@ -7,6 +7,39 @@ describe TwitterParser do
   let(:bad_ls_tweet_data) { twitter_data[2] }
   let(:no_ls_tweet_data) { twitter_data.last }
   let(:deal) { Deal.create(:link => "http://www.livingsocial.com/deals/336350-2-hour-photo-booth-rental-attendant-and-prints", :purchased => 41, :image => "http://a3.ak.lscdn.net/imgs/dc2a04cd-5724-4c87-bdde-8869b3bf8c27/280_q60_.jpg") }
+  let(:first_link) { Rails.root.to_s + "/spec/fixtures/twitter_data/first_tweet_link.html" }
+  let(:second_link) { Rails.root.to_s + "/spec/fixtures/twitter_data/second_tweet_link.html" }
+
+  # before do
+
+  #   first_link = Rails.root.to_s + "/spec/fixtures/twitter_data/first_tweet_link.html"
+  #   second_link = Rails.root.to_s + "/spec/fixtures/twitter_data/second_tweet_link.html"
+  #   third_link = Rails.root.to_s + "/spec/fixtures/twitter_data/third_tweet_link.html"
+  #   fourth_link = Rails.root.to_s + "/spec/fixtures/twitter_data/second_tweet_link.html"
+
+  #   TwitterParser.should_receive(:parse_deal_page).
+  #     with("http://www.livingsocial.com/cities/852-grosse-pointe-macomb-county").
+  #     and_return(first_link)
+
+    # TwitterParser.should_receive(:find_link).
+    #   with(twitter_data[0]).
+    #   and_return(first_link)
+
+    # TwitterParser.should_receive(:find_link).
+    #   with(twitter_data[1]).
+    #   and_return(second_link)
+
+    # TwitterParser.should_receive(:find_link).
+    #   with(twitter_data[2]).
+    #   and_return(second_link)
+
+    # TwitterParser.should_receive(:find_link).
+    #   with(twitter_data[3]).
+    #   and_return(fourth_link)
+
+    # TwitterParser.perform(twitter_data)
+
+  # end
 
   it "should have a perform class method" do
     TwitterParser.respond_to?(:perform).should be_true
@@ -37,14 +70,30 @@ describe TwitterParser do
     context "when a LivingSocial deal link is found" do
 
       it "creates a new Deal object" do
+        TwitterParser.should_receive(:parse_deal_page).
+          with("http://www.livingsocial.com/cities/852-grosse-pointe-macomb-county").
+          and_return(first_link)
+
+        TwitterParser.should_receive(:parse_deal_page).
+          with("https://www.livingsocial.com/canada/cities/53-toronto").
+          and_return(second_link)
+
         expect { TwitterParser.perform(twitter_data) }.to change{ Deal.all.count }.by(2)
       end
 
       it "creates a new Tweet object" do
+        TwitterParser.should_receive(:parse_deal_page).
+          with("http://www.livingsocial.com/cities/852-grosse-pointe-macomb-county").
+          and_return(first_link)
+
         expect { TwitterParser.perform(twitter_data) }.to change{ Tweet.all.count }.by(2)
       end
 
       it "establishes a has-many relationship between the created deal and corresponding tweet" do
+        TwitterParser.should_receive(:parse_deal_page).
+          with("https://www.livingsocial.com/canada/cities/53-toronto").
+          and_return(second_link)
+
         TwitterParser.perform(twitter_data)
         Deal.all.each do |deal|
           deal.tweets.count.should == 1
@@ -66,14 +115,14 @@ describe TwitterParser do
       end
 
       it "should return a string consisting of a link" do
-        TwitterParser.find_link(tweet_data).should == "http://www.livingsocial.com/deals/336350-2-hour-photo-booth-rental-attendant-and-prints"
+        TwitterParser.find_link(tweet_data).should == "http://www.livingsocial.com/cities/852-grosse-pointe-macomb-county"
       end
     end
 
     context "when passed invalid data" do
 
-      it "should return nil" do
-        TwitterParser.find_link(no_ls_tweet_data).should be_nil
+      it "should return the invalid link" do
+        TwitterParser.find_link(no_ls_tweet_data).should == "https://www.missionsmallbusiness.com/"
       end
     end
   end
@@ -96,7 +145,7 @@ describe TwitterParser do
 
       it "should return a Tweet object whose content contains a link to a LivingSocial deal" do
         tweet_content = { "text" => TwitterParser.create_tweet_from(tweet_data, deal.id).content }
-        TwitterParser.find_link(tweet_content).should == "http://www.livingsocial.com/deals/336350-2-hour-photo-booth-rental-attendant-and-prints"
+        TwitterParser.find_link(tweet_content).should == "http://www.livingsocial.com/cities/852-grosse-pointe-macomb-county"
       end
 
     end
@@ -115,7 +164,7 @@ describe TwitterParser do
       end
 
       it "should return a Deal object referenced by a LivingSocial Deal link" do
-        TwitterParser.create_deal_from(TwitterParser.find_link(tweet_data)).link.should == "http://www.livingsocial.com/deals/336350-2-hour-photo-booth-rental-attendant-and-prints"
+        TwitterParser.create_deal_from(TwitterParser.find_link(tweet_data)).link.should == "http://www.livingsocial.com/cities/852-grosse-pointe-macomb-county"
       end
     end
   end
