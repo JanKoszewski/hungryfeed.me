@@ -74,10 +74,6 @@ describe TwitterParser do
           with("http://www.livingsocial.com/cities/852-grosse-pointe-macomb-county").
           and_return(first_link)
 
-        TwitterParser.should_receive(:open).
-          with("https://www.livingsocial.com/canada/cities/53-toronto").
-          and_return(second_link)
-
         expect { TwitterParser.perform(twitter_data) }.to change{ Deal.all.count }.by(2)
       end
 
@@ -91,8 +87,8 @@ describe TwitterParser do
 
       it "establishes a has-many relationship between the created deal and corresponding tweet" do
         TwitterParser.should_receive(:open).
-          with("https://www.livingsocial.com/canada/cities/53-toronto").
-          and_return(second_link)
+          with("http://www.livingsocial.com/cities/852-grosse-pointe-macomb-county").
+          and_return(first_link)
 
         TwitterParser.perform(twitter_data)
         Deal.all.each do |deal|

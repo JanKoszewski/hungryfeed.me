@@ -9,9 +9,11 @@ class TwitterParser
 
   def self.perform(tweet_array)
     tweet_array.each do |tweet|
-      if link = find_link(tweet) && validate_link(link)
-        deal_id = create_deal_from(link).id
-        create_tweet_from(tweet, deal_id)
+      if link = find_link(tweet)
+        if validate_link(link)
+          deal_id = create_deal_from(link).id
+          create_tweet_from(tweet, deal_id)
+        end
       end
     end
   end

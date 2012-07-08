@@ -1,7 +1,8 @@
 require 'spec_helper'
 
 describe Tweet do
-  let(:tweet) { Tweet.create(:twitter_username => "jkoszewski", :twitter_user_image => "http://a0.twimg.com/sticky/default_profile_images/default_profile_6_normal.png", :deal_id => 1) }
+  let(:deal) { Deal.create(:link => "http://www.livingsocial.com/cities/1-washington-d-c/deals/315382-one-month-gym-membership", :purchased => 192, :title => "Crunch Fitness") }
+  let(:tweet) { Tweet.create(:twitter_username => "jkoszewski", :twitter_user_image => "http://a0.twimg.com/sticky/default_profile_images/default_profile_6_normal.png", :deal_id => deal.id) }
   
   it "has an ActiveModel mass assignment method for content" do
     expect { tweet.send(:content) }.to_not raise_error(NoMethodError)
@@ -45,7 +46,7 @@ describe Tweet do
     end
 
     context "when a user already exists" do
-      let(:new_tweet) { Tweet.create(:twitter_username => "jkoszewski", :content => "second post!", :twitter_user_image => "http://a0.twimg.com/sticky/default_profile_images/default_profile_6_normal.png", :deal_id => 1) }
+      let(:new_tweet) { Tweet.create(:twitter_username => "jkoszewski", :content => "second post!", :twitter_user_image => "http://a0.twimg.com/sticky/default_profile_images/default_profile_6_normal.png", :deal_id => deal.id) }
       let(:created_user) { User.create(:twitter_username => "jkoszewski") }
 
       it "returns a user object" do

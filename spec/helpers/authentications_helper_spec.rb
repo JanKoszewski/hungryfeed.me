@@ -11,5 +11,19 @@ require 'spec_helper'
 #   end
 # end
 describe AuthenticationsHelper do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe "#login_path" do
+  	context "when in Production environment" do
+  		it "returns a hungryfeedme.herokuapp url" do
+  			Rails.env = 'production'
+  			login_path = "href='http://hungryfeedme.herokuapp.com/auth/twitter'"
+  		end
+  	end
+
+  	context "when in development environment" do
+  		it "returns a lvh.me url" do
+  			Rails.env = 'development'
+  			login_path = "href='http://lvh.me:3000/auth/twitter'"
+  		end
+  	end
+  end
 end

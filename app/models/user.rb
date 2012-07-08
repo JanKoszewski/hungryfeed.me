@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
   # :lockable, :timeoutable and :omniauthable
   devise :registerable, :recoverable, :rememberable, :trackable, :database_authenticatable
 
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :twitter_link, :twitter_username, :klout_score, :oauth_token, :oauth_token_secret
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :twitter_link, :twitter_username, :klout_score
 
   before_save :set_klout_score
   before_save :set_twitter_link
@@ -27,11 +27,13 @@ class User < ActiveRecord::Base
   end
 
   def build_authentication(omniauth)
-    self.authentications.build(:provider => omniauth ['provider'], 
-                               :uid => omniauth['uid'], 
-                               :access_token => omniauth["credentials"]["token"])
-    self.oauth_token = omniauth["credentials"]["token"]
-    self.oauth_token_secret = omniauth["credentials"]["secret"]
+    self.authentications.build(
+      :provider => omniauth['provider'], 
+      :uid => omniauth['uid'], 
+      :access_token => omniauth["credentials"]["token"],
+      :oauth_token => omniauth["credentials"]["token"],
+      :oauth_token_secret => omniauth["credentials"]["secret"]
+     )
   end
 
   def find_klout_score
