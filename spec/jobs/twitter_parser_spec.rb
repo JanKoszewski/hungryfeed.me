@@ -58,7 +58,7 @@ describe TwitterParser do
   end
 
   it "should have a validate_deal_with class method" do
-    TwitterParser.respond_to?(:validate_deal_with).should be_true
+    TwitterParser.respond_to?(:validate_link).should be_true
   end
 
   describe ".perform" do
@@ -70,11 +70,11 @@ describe TwitterParser do
     context "when a LivingSocial deal link is found" do
 
       it "creates a new Deal object" do
-        TwitterParser.should_receive(:parse_deal_page).
+        TwitterParser.should_receive(:open).
           with("http://www.livingsocial.com/cities/852-grosse-pointe-macomb-county").
           and_return(first_link)
 
-        TwitterParser.should_receive(:parse_deal_page).
+        TwitterParser.should_receive(:open).
           with("https://www.livingsocial.com/canada/cities/53-toronto").
           and_return(second_link)
 
@@ -82,7 +82,7 @@ describe TwitterParser do
       end
 
       it "creates a new Tweet object" do
-        TwitterParser.should_receive(:parse_deal_page).
+        TwitterParser.should_receive(:open).
           with("http://www.livingsocial.com/cities/852-grosse-pointe-macomb-county").
           and_return(first_link)
 
@@ -90,7 +90,7 @@ describe TwitterParser do
       end
 
       it "establishes a has-many relationship between the created deal and corresponding tweet" do
-        TwitterParser.should_receive(:parse_deal_page).
+        TwitterParser.should_receive(:open).
           with("https://www.livingsocial.com/canada/cities/53-toronto").
           and_return(second_link)
 
@@ -160,28 +160,38 @@ describe TwitterParser do
     context "when passed valid data" do
 
       it "should return a Deal object" do
+
+        TwitterParser.should_receive(:open).
+          with("http://www.livingsocial.com/cities/852-grosse-pointe-macomb-county").
+          and_return(first_link)
+
         TwitterParser.create_deal_from(TwitterParser.find_link(tweet_data)).should be_a_kind_of(Deal)
       end
 
       it "should return a Deal object referenced by a LivingSocial Deal link" do
-        TwitterParser.create_deal_from(TwitterParser.find_link(tweet_data)).link.should == "http://www.livingsocial.com/cities/852-grosse-pointe-macomb-county"
+
+        TwitterParser.should_receive(:open).
+          with("http://www.livingsocial.com/cities/852-grosse-pointe-macomb-county").
+          and_return(first_link)
+
+        TwitterParser.create_deal_from(TwitterParser.find_link(tweet_data)).link.should == "http://www.livingsocial.com/cities/852-grosse-pointe-macomb-county/deals/336350-2-hour-photo-booth-rental-attendant-and-prints"
       end
     end
   end
 
-  describe "validate_deal_with" do
+  describe "validate_link" do
 
     context "when passed an invalid local deal link" do
 
       it "should return false" do
-        TwitterParser.validate_deal_with(TwitterParser.find_link(bad_ls_tweet_data)).should be_false
+        TwitterParser.validate_link(TwitterParser.find_link(bad_ls_tweet_data)).should be_false
       end
     end
 
     context "when passed a valid local deal link" do
 
       it "should return true" do
-        TwitterParser.validate_deal_with(TwitterParser.find_link(tweet_data)).should be_true
+        TwitterParser.validate_link(TwitterParser.find_link(tweet_data)).should be_true
       end
     end
   end

@@ -9,11 +9,9 @@ class TwitterParser
 
   def self.perform(tweet_array)
     tweet_array.each do |tweet|
-      if link = find_link(tweet)
-        if validate_deal_with(link)
-          deal_id = create_deal_from(link).id
-          create_tweet_from(tweet, deal_id)
-        end
+      if link = find_link(tweet) && validate_link(link)
+        deal_id = create_deal_from(link).id
+        create_tweet_from(tweet, deal_id)
       end
     end
   end
@@ -57,7 +55,7 @@ class TwitterParser
     }
   end
 
-  def self.validate_deal_with(link)
+  def self.validate_link(link)
     if link.match(LINK_VALIDATION_REGEX) && link.match(LINK_VALIDATION_REGEX)[1] != "events"
       true
     end
