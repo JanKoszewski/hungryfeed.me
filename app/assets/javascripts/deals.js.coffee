@@ -14,7 +14,11 @@ jQuery ->
     if $("#deals").find($("#deal_"+ deal.id)).length
       tweetsColorer()
     else
-      dealHandler(deal)
+      deal_id = 'deal_'+deal.id
+      $("#deals").prepend("<div class='deal' id="+deal_id+"></div>")
+      $("#"+deal_id).html(Mustache.to_html($("#deal_template").html(), deal))
+      $("#"+deal_id+" .details").after("<div class='tweets' id=tweets_for_"+deal_id+"></div>")
+      $("#tweets_for_"+deal_id).after(Mustache.to_html($("#deal_form_template").html(), deal))
       tweetsColorer()
 
   tweet_channel = pusher.subscribe("tweets")
