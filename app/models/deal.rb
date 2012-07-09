@@ -1,7 +1,7 @@
 class Deal < ActiveRecord::Base
   attr_accessible :link, :purchased, :image, :title
 
-  after_save :broadcast_deal
+  after_create :broadcast_deal
 
   has_many :tweets
 
