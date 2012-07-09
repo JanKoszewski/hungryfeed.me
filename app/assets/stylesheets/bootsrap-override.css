@@ -4,6 +4,11 @@
   margin: 0 auto;
 }
 
+#tweets .tweet_details_table
+{
+  width: 798px;
+}
+
 
 .deal 
 {

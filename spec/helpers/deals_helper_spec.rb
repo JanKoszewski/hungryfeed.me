@@ -11,5 +11,7 @@ require 'spec_helper'
 #   end
 # end
 describe DealsHelper do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe "#deals_for_mustache" do
+  	
+  end
 end
