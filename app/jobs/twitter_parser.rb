@@ -49,13 +49,17 @@ class TwitterParser
   end
 
   def self.parse_deal_page(link)
-    doc = Nokogiri::HTML(open(link))
+    doc = build_doc(link)
     {:link => doc.at('link[rel=canonical]')['href'], 
      :image => doc.at('//img')['src'], 
      :purchased => doc.at('.purchased .value').text.gsub(/\D/, "").to_i,
      :title => doc.at('.deal-title h1').text
     }
   end
+
+  def self.build_doc(link)
+    doc = Nokogiri::HTML(open(link))
+  end 
 
   def self.validate_link(link)
     if link.match(LINK_VALIDATION_REGEX) && link.match(LINK_VALIDATION_REGEX)[1] != "events"

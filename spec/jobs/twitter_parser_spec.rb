@@ -69,27 +69,21 @@ describe TwitterParser do
 
     context "when a LivingSocial deal link is found" do
 
-      it "creates a new Deal object" do
-        TwitterParser.should_receive(:open).
-          with("http://www.livingsocial.com/cities/852-grosse-pointe-macomb-county").
-          and_return(first_link)
+      before(:each) do
+        doc_1 = Nokogiri::HTML(open(first_link))
+        doc_2 = Nokogiri::HTML(open(second_link))
+        TwitterParser.stub(:build_doc).and_return(doc_1, doc_2)
+      end
 
+      it "creates a new Deal object" do
         expect { TwitterParser.perform(twitter_data) }.to change{ Deal.all.count }.by(2)
       end
 
       it "creates a new Tweet object" do
-        TwitterParser.should_receive(:open).
-          with("http://www.livingsocial.com/cities/852-grosse-pointe-macomb-county").
-          and_return(first_link)
-
         expect { TwitterParser.perform(twitter_data) }.to change{ Tweet.all.count }.by(2)
       end
 
       it "establishes a has-many relationship between the created deal and corresponding tweet" do
-        TwitterParser.should_receive(:open).
-          with("http://www.livingsocial.com/cities/852-grosse-pointe-macomb-county").
-          and_return(first_link)
-
         TwitterParser.perform(twitter_data)
         Deal.all.each do |deal|
           deal.tweets.count.should == 1
@@ -155,21 +149,17 @@ describe TwitterParser do
 
     context "when passed valid data" do
 
+      before(:each) do
+        doc_1 = Nokogiri::HTML(open(first_link))
+        doc_2 = Nokogiri::HTML(open(second_link))
+        TwitterParser.stub(:build_doc).and_return(doc_1, doc_2)
+      end
+
       it "should return a Deal object" do
-
-        TwitterParser.should_receive(:open).
-          with("http://www.livingsocial.com/cities/852-grosse-pointe-macomb-county").
-          and_return(first_link)
-
         TwitterParser.create_deal_from(TwitterParser.find_link(tweet_data)).should be_a_kind_of(Deal)
       end
 
       it "should return a Deal object referenced by a LivingSocial Deal link" do
-
-        TwitterParser.should_receive(:open).
-          with("http://www.livingsocial.com/cities/852-grosse-pointe-macomb-county").
-          and_return(first_link)
-
         TwitterParser.create_deal_from(TwitterParser.find_link(tweet_data)).link.should == "http://www.livingsocial.com/cities/852-grosse-pointe-macomb-county/deals/336350-2-hour-photo-booth-rental-attendant-and-prints"
       end
     end
